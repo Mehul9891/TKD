@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+ 
+<ehcache>
+ 
+<defaultCache maxElementsInMemory="100" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="200" />
+<cache name="Customer" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="5" timeToLiveSeconds="200" />
+ <cache name="Vendor" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="5" timeToLiveSeconds="200" />
+ <cache name="CompletedRequest" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="5" timeToLiveSeconds="200" />
+ <cache name="PendingRequest" maxElementsInMemory="100" eternal="false" timeToIdleSeconds="5" timeToLiveSeconds="200" />
+ 
+</ehcache>

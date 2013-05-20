@@ -1,0 +1,160 @@
+i
+{
+	text-align:center;
+	font-family:fantasy;
+	font-stretch: expanded;
+	font-weight: normal;
+	font-size:xx-large;
+    color: white; 
+    overflow: hidden;   
+}
+
+.inline li{
+	display:inline;
+	color: white;
+	text-align:center;
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: normal;
+
+	font-size:large;
+  	font-style:oblique; 
+    overflow: hidden;   
+}
+.top_header
+{
+	width: 100%;
+	height: 150px;
+	background-position:100%;
+	background-position:top;
+	background-image: url(images/header_repairs.jpg);
+	
+	
+}
+i2
+{
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: normal;
+	font-size:medium;
+    color: #003366;
+}
+H1
+{   
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: bolder;
+	font-size:large;
+    color: white;
+    background-color: #003366;
+    border-radius: 10px;
+    text-align:center;
+    width: 300px;
+      	
+}
+.text1
+{
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: normal;
+	font-size:medium;
+    color: #003366;
+}
+.label
+{
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: bold;
+	font-size:medium;
+    color: #003366;
+}
+.headline
+{   
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: bolder;
+	font-size:large;
+    color: #003366;
+    text-align:center;
+    
+      	
+}
+li
+{
+font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: normal;
+	font-size:large;
+    color: black;
+    
+}
+.button
+{
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: bolder;
+	font-size:large;
+    color: #003366;
+    text-align:center;
+}
+
+tr.header{
+    font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: bolder;
+	font-size:large;
+    color: #003366;
+    text-align:center;	
+    border-left: 1px solid #003366;
+    border-right: 1px solid #003366;
+    border-bottom: 1px solid #003366;
+    border-top: 1px solid #003366;
+
+}
+
+iframe.LosOverlay{
+		display: none;
+		position: absolute;
+		background-color: white;
+		top: 50; left: 50; width: 90%; height: 90%;
+		
+	}
+div.LosOverlayCurtain{
+	display: none;
+	position: absolute;
+	overflow:hidden;
+	background-color: black;
+	width: 100%; height: 100%;
+}	
+.button	
+{
+	font-family:sans-serif;
+	font-stretch: expanded;
+	font-weight: bolder;
+	font-size:large;
+    color: white;
+    background-color: #003366;
+    border-radius: 5px;
+    text-align:center;
+    
+}
+table.datagrid thead
+{
+	border:thin;
+	background-color:silver;
+	 border-top: 1px solid #003366; 
+	border-left: 1px solid #003366;
+    /* border-right: 1px solid #003366; */
+    
+    /*border-bottom: 1px solid #003366;*/
+}
+table.datagrid td
+{
+	border:thin;
+	 border-top: 1px solid #003366; 
+	border-left: 1px solid #003366;
+	
+    /* border-right: 1px solid #003366; */
+    
+    /*border-bottom: 1px solid #003366;*/
+}

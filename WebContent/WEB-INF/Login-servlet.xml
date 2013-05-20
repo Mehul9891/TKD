@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="simpleUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/login.htm">loginController</prop>
+				<prop key="/contact.htm">contactDetailsController</prop>
+				<prop key="/sendEmail.htm">sendEmailController</prop>
+				<prop key="/registerVendor.htm">registerVendorController</prop>
+				<prop key="/selectVendor.htm">selectVendorController</prop>
+				<prop key="/pendingComplaints.htm">pendingRequestController</prop>
+				<prop key="/pendingRequestDetails.htm">pendingRequestDetailsController</prop>
+				<prop key="/payments.htm">paymentsController</prop>
+				<prop key="/paymentDetails.htm">paymentDetailsController</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			    <property name="viewClass">
+			       <value>org.springframework.web.servlet.view.JstlView</value>
+			    </property>
+			    <property name="prefix"><value>/WEB-INF/jsp/</value></property>
+			    <property name="suffix"><value>.jsp</value></property>
+			</bean> -->
+
+	
+	
+	
+	<bean id="loginController" class="com.nb.controller.loginController">
+		<property name="formView" value="index.jsp"/>
+		<property name="successView" value="jsp/home.jsp"/>
+		<property name="commandName" value="loginForm"/>
+		<property name="commandClass" value="com.nb.form.LoginForm"/>
+	</bean>
+	<bean id="contactDetailsController" class="com.nb.controller.ContactDetailsController">
+		<property name="formView" value="jsp/contact.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="contactDetailsForm"/>
+		<property name="commandClass" value="com.nb.form.ContactDetailsForm"/>
+	</bean>
+	
+	<bean id="sendEmailController" class="com.nb.controller.SendEmailController">
+		<property name="formView" value="jsp/sendEmail.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="sendEmailForm"/>
+		<property name="commandClass" value="com.nb.form.SendEmailForm"/>
+	</bean>
+	<bean id="registerVendorController" class="com.nb.controller.VendorController">
+		<property name="formView" value="jsp/vendorDetails.jsp"/>
+		<property name="successView" value="login.htm"/>
+		<property name="commandName" value="vendorForm"/>
+		<property name="commandClass" value="com.nb.form.VendorForm"/>
+	</bean>
+	<bean id="selectVendorController" class="com.nb.controller.SelectVendorController">
+		<property name="formView" value="jsp/selectVendor.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="selectVendorForm"/>
+		<property name="commandClass" value="com.nb.form.SelectVendorForm"/>
+		
+	</bean>
+	
+	<bean id="pendingRequestController" class="com.nb.controller.PendingRequestController">
+		<property name="formView" value="jsp/pendingRequest.jsp"/>
+		<property name="successView" value="pendingComplaints.htm"/>
+		<property name="commandName" value="pendingRequestForm"/>
+		<property name="commandClass" value="com.nb.form.PendingRequestForm"/>
+		
+	</bean>	
+	<bean id="pendingRequestDetailsController" class="com.nb.controller.PendingRequestDetailsController">
+		<property name="formView" value="jsp/pendingRequestDetails.jsp"/>
+		<property name="successView" value="jsp/completedRequestConfirmation.jsp"/>
+		<property name="commandName" value="pendingRequestDetailsForm"/>
+		<property name="commandClass" value="com.nb.form.PendingRequestDetailsForm"/>
+		
+	</bean>	
+		
+	<bean id="paymentsController" class="com.nb.controller.PaymentsController">
+		<property name="formView" value="jsp/payments.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="paymentsForm"/>
+		<property name="commandClass" value="com.nb.form.PaymentsForm"/>
+		
+	</bean>	
+	
+	<bean id="paymentDetailsController" class="com.nb.controller.PaymentDetailsController">
+		<property name="formView" value="jsp/paymentDetails.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="paymentDetailsForm"/>
+		<property name="commandClass" value="com.nb.form.PaymentDetailsForm"/>
+		
+	</bean>	
+			
+</beans>
