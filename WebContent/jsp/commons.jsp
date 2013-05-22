@@ -20,9 +20,10 @@
 			<li ><a href="pendingComplaints.htm">Pending Complaints</a></li>&nbsp;&nbsp;&nbsp;
 			<li ><a href="registerVendor.htm">Register Vendor</a></li>&nbsp;&nbsp;&nbsp;
 			<li ><a href="payments.htm">Payments</a></li>&nbsp;&nbsp;&nbsp;
-				<li ><a href="sendEmail.htm">Send Email</a></li>&nbsp;&nbsp;&nbsp;
+			<li ><a href="sendEmail.htm">Send Email</a></li>&nbsp;&nbsp;&nbsp;
+			<li ><a href="codeMaster.htm">Code Master</a></li>&nbsp;&nbsp;&nbsp;
 			<li ><a href="contact.htm">Contact Us</a></li>
-	</ul>
+	</ul>	
 	
 
 </div>

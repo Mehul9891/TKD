@@ -1,11 +1,14 @@
 package com.nb.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Vendor {
 	
 	private int vendor_id ;
-	private String name ;
+	private String officeName;
+	private String companyName;
+	private String ownername ;
 	private String mobile_no;
 	private String address;
 	private String catered_products;
@@ -22,11 +25,12 @@ public class Vendor {
 	public void setVendor_id(int vendor_id) {
 		this.vendor_id = vendor_id;
 	}
-	public String getName() {
-		return name;
+	
+	public String getOwnername() {
+		return ownername;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setOwnername(String ownername) {
+		this.ownername = ownername;
 	}
 	public String getMobile_no() {
 		return mobile_no;
@@ -75,6 +79,18 @@ public class Vendor {
 	}
 	public void setUpdated_date(Date updated_date) {
 		this.updated_date = updated_date;
+	}
+	public String getOfficeName() {
+		return officeName;
+	}
+	public void setOfficeName(String officeName) {
+		this.officeName = officeName;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	

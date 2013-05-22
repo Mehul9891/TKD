@@ -27,6 +27,25 @@ function selectVendor(vendorId)
 </script>
 <body>
 <form method="post"> 
+<table>
+	<tr>
+		<td width="20%" align="right" class="text1">
+			Location : 
+		</td>
+		<td width="25%" align="left">
+			<input type="text"  id="location" name="location"  size="30"/>
+		</td>
+		
+		<td width="20%" align="right" class="text1">
+			Repair Product : 
+		</td>
+		<td width="25%" align="left">
+			<input type="text" id="repairProduct" name="repairProduct" size="30"/>
+		</td>
+	</tr>
+
+</table>
+<br>
 <table width="100%" class="datagrid">
 	<thead>
 		<tr class="header">
@@ -49,7 +68,7 @@ function selectVendor(vendorId)
 					
 				</td>
 				<td align="center" class="text1">
-					<c:out value="${selectVendorForm.lstVendor[loopStatus.index].name}"></c:out>
+					<c:out value="${selectVendorForm.lstVendor[loopStatus.index].ownername}"></c:out>
 					
 				</td>
 				<td align="center" class="text1">

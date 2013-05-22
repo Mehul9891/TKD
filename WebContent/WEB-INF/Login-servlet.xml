@@ -15,6 +15,7 @@
 				<prop key="/pendingRequestDetails.htm">pendingRequestDetailsController</prop>
 				<prop key="/payments.htm">paymentsController</prop>
 				<prop key="/paymentDetails.htm">paymentDetailsController</prop>
+				<prop key="/codeMaster.htm">codeMasterController</prop>
 			</props>
 		</property>
 	</bean>
@@ -51,7 +52,7 @@
 	</bean>
 	<bean id="registerVendorController" class="com.nb.controller.VendorController">
 		<property name="formView" value="jsp/vendorDetails.jsp"/>
-		<property name="successView" value="login.htm"/>
+		<property name="successView" value="jsp/submit.jsp"/>
 		<property name="commandName" value="vendorForm"/>
 		<property name="commandClass" value="com.nb.form.VendorForm"/>
 	</bean>
@@ -91,6 +92,14 @@
 		<property name="successView" value="jsp/submit.jsp"/>
 		<property name="commandName" value="paymentDetailsForm"/>
 		<property name="commandClass" value="com.nb.form.PaymentDetailsForm"/>
+		
+	</bean>	
+	
+	<bean id="codeMasterController" class="com.nb.controller.CodeMasterController">
+		<property name="formView" value="jsp/codeMaster.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="codeMasterForm"/>
+		<property name="commandClass" value="com.nb.form.CodeMasterForm"/>
 		
 	</bean>	
 			

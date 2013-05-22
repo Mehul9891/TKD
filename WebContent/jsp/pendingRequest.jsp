@@ -46,15 +46,53 @@ $(document).ready(function(){
 		$("body").css("overflow", "auto");
 		document.forms[0].submit();
 	}
+</script>
 
-
-
+<%-- <script type="text/javascript">
+$(document).ready(function(){
+	
+	[IDC-337262 | 2011.07.22] CIF SEARCH OVERLAY is launched from page-specific function
+	
+	
+	$("#curtain1").click(function(){
+		$(this).toggle();
+		$("#popupFrame1").toggle();
+		$("body").css("overflow", "auto");
+		
+		[IDC-337262 | 2011.08.05] CLEAR CONTENTS OF OVERLAY FRAME
+		$("#popupFrame1").attr("src", "about:blank");		
+	});
+});
+	function showVendorDetails(){
+		$("#curtain1").toggle();		
+		
+		$("#popupFrame1").toggle();
+		$("#popupFrame1").focus();
+		$("#popupFrame1").attr("src", "selectVendor.htm");
+		//$("body").css("overflow", "hidden");
+		$("body").css("overflow", "auto");	  
+	}
+	
+	function hidePopupFrame1(){
+		$("#curtain1").toggle();
+		$("#popupFrame1").toggle();	
+		
+		[IDC-337262 | 2011.08.05] CLEAR CONTENTS OF OVERLAY FRAME
+		$("#popupFrame1").attr("src", "about:blank");
+		$("body").css("overflow", "auto");
+		document.forms[0].submit();
+	}
 
 </script>
+
+ --%>
 <body>
 <form method="post" id="pendingRequest"> 
 <div class="LosOverlayCurtain" id="curtain" >&nbsp;</div>
 <iframe class="LosOverlay" id="popupFrame"  name="popupFrame"  ></iframe>
+
+<div class="LosOverlayCurtain" id="curtain1" >&nbsp;</div>
+<iframe class="LosOverlay" id="popupFrame1"  name="popupFrame1"  ></iframe>
 		
 
 <table width="100%" class="datagrid">
@@ -65,12 +103,13 @@ $(document).ready(function(){
 			<td  width="20%">Vendor Id</td>
 			<td  width="20%">product</td>
 			<td  width="20%">Date</td>
+			<td  width="20%">Associate Vendor</td>
 		</tr>
 	</thead>
 	
 	<tbody>
 	<c:if test="${pendingRequestForm.lstPendingRequest ne null}">
-		<c:forEach begin="0" end="${size}"   varStatus="loopStatus">
+		<c:forEach begin="0" end="${size - 1}"   varStatus="loopStatus">
 	
 			<tr>
 				
@@ -91,11 +130,19 @@ $(document).ready(function(){
 				<td align="center" class="text1">
 					<c:out value="${pendingRequestForm.lstPendingRequest[loopStatus.index].date_of_request}"></c:out>
 				</td>
+				
+				<td align="center" class="text1">
+					<input type="button" value="Vendor List" onclick="showVendorDetails();"/>
+				</td>
+				
 			</tr>
 			
 		</c:forEach>
 	</c:if>
+		<tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td>
 		
+		</tr>
 	</tbody>
 </table>
 	<spring:bind path="pendingRequestForm.selectedReqId">

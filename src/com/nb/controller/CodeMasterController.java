@@ -1,65 +1,62 @@
 package com.nb.controller;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.Request;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
+import com.nb.entity.CodeMaster;
 import com.nb.entity.Vendor;
-import com.nb.form.VendorForm;
+import com.nb.form.CodeMasterForm;
+import com.nb.form.SelectVendorForm;
 import com.nb.util.SessionFactoryUtil;
 
-public class VendorController extends SimpleFormController {
+public class CodeMasterController extends SimpleFormController{
 	
-	private VendorForm vendorform ;
-	@Override
+	CodeMasterForm codeMasterForm = null;
+	
+	
 	protected ModelAndView onSubmit(HttpServletRequest request,
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
-		
 		Session session = null;
 		// TODO Auto-generated method stub
-		/*SessionFactory factory = new Configuration().configure().buildSessionFactory();
-		Session session = factory.openSession();*/
+		codeMasterForm =(CodeMasterForm)command;
+		
+		CodeMaster codeMaster = new CodeMaster();
+		codeMaster.setCodeMasterSyntex(codeMasterForm.getCodeMasterSyntex());
+		codeMaster.setCodeMasterFieldName(codeMasterForm.getNewCodeMasterName());
+		codeMaster.setCodeMasterFieldValue(codeMasterForm.getNewCodeMasterValue());
+		
+		
 		session = SessionFactoryUtil.getSessionInstance();
 		session.beginTransaction();
-		vendorform =(VendorForm)command;
-	 	Vendor vendor = new Vendor();
-	 	vendor.setCompanyName(vendorform.getVendor().getCompanyName());
-	 	vendor.setOfficeName(vendorform.getVendor().getOfficeName());
-	 	vendor.setOwnername(vendorform.getVendor().getOwnername());
-	 	vendor.setMobile_no(vendorform.getVendor().getMobile_no());
-	 	vendor.setAddress(vendorform.getVendor().getAddress());
-	 	vendor.setCatered_products(vendorform.getVendor().getCatered_products());
-	 	vendor.setNo_of_technicians(vendorform.getVendor().getNo_of_technicians());
-	 	vendor.setPincode(vendorform.getVendor().getPincode());
-	 	vendor.setZone(vendorform.getVendor().getZone());
-	 	vendor.setCreated_date(new Date());
-	 	
-	 	session.save(vendor);
+		session.save(codeMaster);
 		session.getTransaction().commit();
-		System.out.println("vendor registered successfully;");
+		
+		System.out.println("Code Master Entry successfull");
 		session.close();
+		
 		return super.onSubmit(request, response, command, errors);
 	}
 
 	@Override
 	protected Object formBackingObject(HttpServletRequest request)
 			throws Exception {
-		 vendorform = new VendorForm();
-		// TODO Auto-generated method stub
-		return vendorform;
+		
+		codeMasterForm = new CodeMasterForm();
+			return codeMasterForm;
 	}
 
 	@Override
@@ -71,11 +68,11 @@ public class VendorController extends SimpleFormController {
 		session.beginTransaction();
 		 String hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
          Query query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "LOCATION");
+         query.setString("codeMasterSyntex", "CODE_MASTER");
          List result = query.list();
          if(result != null && result.size()>0)
          {
-        	 request.setAttribute("lstLocation", result);
+        	 request.setAttribute("lstCodeMaster", result);
          }
 		
 		session.getTransaction().commit();
@@ -87,4 +84,6 @@ public class VendorController extends SimpleFormController {
 		return super.referenceData(request, command, errors);
 	}
 	
+	
+
 }

@@ -44,6 +44,12 @@ $(document).ready(function(){
 		$("body").css("overflow", "auto");	
 	}
 
+	function SearchResult()
+	{
+		document.getElementById("operationFlag").value = "SearchCustomer";
+		document.forms[0].submit();
+		
+	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Theek kar do.com</title>
@@ -57,11 +63,23 @@ $(document).ready(function(){
 
 <H1>Welcome to Theek kar do.com</H1>
 	<table >
+	
+		<tr>
+			<td class="text1">Phone No:</td>
+			<td>
+				<spring:bind path="loginForm.customer.mobile_no">
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" maxlength="10"/>
+				</spring:bind>
+			</td>
+			<td align="left">
+				<input type="button" value="Search" onclick="SearchResult();" />
+			</td>	
+		</tr>
 		<tr>
 			<td class="text1">Name :</td>
 			<td>
 				<spring:bind path="loginForm.customer.name">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" />
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
 				</spring:bind>
 			</td>
 		</tr>
@@ -69,23 +87,17 @@ $(document).ready(function(){
 		<tr><td class="text1">Email ID:</td>
 			<td>
 			<spring:bind path="loginForm.customer.emailId">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
 			</spring:bind>
 			</td>
 		</tr>
-		<tr>
-			<td class="text1">Phone No:</td>
-			<td>
-				<spring:bind path="loginForm.customer.mobile_no">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/></td>
-				</spring:bind>
-		</tr>
+		
 		
 		<tr>
 			<td class="text1">Customer Add:</td>
 			<td>
 				<spring:bind path="loginForm.customer.cust_address">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/></td>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/></td>
 				</spring:bind>
 		</tr>
 		
@@ -93,7 +105,12 @@ $(document).ready(function(){
 			<td class="text1">Zone :</td>
 			<td>
 				<spring:bind path="loginForm.customer.zone">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/></td>
+							<select id="${status.expression}" name="${status.expression}" >
+									<option></option>
+									  <c:forEach items="${lstLocation}" var="locationDetails">
+										<option value="${locationDetails.codeMasterFieldValue}" >${locationDetails.codeMasterFieldName}</option>
+									 </c:forEach>	
+							</select>				
 				</spring:bind>
 		</tr>
 		
@@ -101,7 +118,7 @@ $(document).ready(function(){
 			<td class="text1">Pincode :</td>
 			<td>
 				<spring:bind path="loginForm.customer.pincode">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/></td>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/></td>
 				</spring:bind>
 		</tr>
 		
@@ -109,7 +126,13 @@ $(document).ready(function(){
 			<td class="text1">Repair Product :</td>
 			<td>
 				<spring:bind path="loginForm.customer.products_repaired">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/></td>
+					<select id="${status.expression}" name="${status.expression}" >
+								<option></option>
+							   <c:forEach items="${lstproduct}" var="productDetails">
+								<option value="${productDetails.codeMasterFieldValue}" >${productDetails.codeMasterFieldName}</option>
+								
+								</c:forEach>	
+					</select></td>
 				</spring:bind>
 		</tr>
 		
@@ -117,7 +140,7 @@ $(document).ready(function(){
 			<td class="text1">Product Model :</td>
 			<td>
 				<spring:bind path="loginForm.product_model">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
 				</spring:bind>
 			</td>
 		</tr>
@@ -126,7 +149,7 @@ $(document).ready(function(){
 			<td class="text1">Problem :</td>
 			<td>
 				<spring:bind path="loginForm.problem">
-					<textarea rows="2" cols="50"  id="${status.expression}" name="${status.expression}" value="${status.value}"></textarea>
+					<textarea rows="2" cols="40"  id="${status.expression}" name="${status.expression}" value="${status.value}"></textarea>
 				</spring:bind>
 			</td>	
 		</tr>
@@ -142,11 +165,11 @@ $(document).ready(function(){
 			<td class="text1">Vendor :</td>
 			<td>
 				<spring:bind path="loginForm.vendor.vendor_id">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" />
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
 				</spring:bind>
 			</td>
 			
-			<td><input type="button" value="Select"  id="selectVendor"/></td>	
+			<td align="left"><input type="button" value="Select"  id="selectVendor"/></td>	
 		</tr> 
 		
 		<tr>
@@ -154,7 +177,7 @@ $(document).ready(function(){
 			<td><input type="submit"/></td>
 		</tr>
 	</table> 
-	
+	<input type="hidden" id="operationFlag" name="operationFlag"  />
 	
 	</form>
 	

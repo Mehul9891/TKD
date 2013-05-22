@@ -16,11 +16,29 @@
 <form  method="post">
 <H1>Register Vendor</H1>
 	<table >
-		<tr>
-			<td class="text1">Name :</td>
+	<tr>
+			<td class="text1">Company Name :</td>
 			<td>
-				<spring:bind path="vendorForm.vendor.name">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" />
+				<spring:bind path="vendorForm.vendor.companyName">
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"  size="30"/>
+				</spring:bind>
+			</td>
+		</tr>
+		<tr>
+			<td class="text1">Office Name :</td>
+			<td>
+				<spring:bind path="vendorForm.vendor.officeName">
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
+				</spring:bind>
+			</td>
+		</tr>
+	
+	
+		<tr>
+			<td class="text1">Owner Name :</td>
+			<td>
+				<spring:bind path="vendorForm.vendor.ownername">
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
 				</spring:bind>
 			</td>
 		</tr>
@@ -28,14 +46,13 @@
 		<tr><td class="text1">Mobile No :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.mobile_no">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
-			</spring:bind>
+				<textarea rows="2" cols="30"  id="${status.expression}" name="${status.expression}" value="${status.value}" ></textarea>			</spring:bind>
 			</td>
 		</tr>
 		<tr><td class="text1">Address :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.address">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+				<textarea rows="2" cols="30"  id="${status.expression}" name="${status.expression}" value="${status.value}" ></textarea>
 			</spring:bind>
 			</td>
 		</tr>
@@ -43,7 +60,7 @@
 		<tr><td class="text1">Products Catered :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.catered_products">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
 			</spring:bind>
 			</td>
 		</tr>
@@ -51,21 +68,27 @@
 		<tr><td class="text1">No of Technicians :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.no_of_technicians">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
 			</spring:bind>
 			</td>
 		</tr>
 		<tr><td class="text1">Pincode :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.pincode">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
 			</spring:bind>
 			</td>
 		</tr>
 		<tr><td class="text1">Zone :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.zone">
-				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"/>
+							<select id="${status.expression}" name="${status.expression}">
+									<option></option>
+									  <c:forEach items="${lstLocation}" var="locationDetails">
+										<option value="${locationDetails.codeMasterFieldValue}" >${locationDetails.codeMasterFieldName}</option>
+									 </c:forEach>	
+							</select>		
+							
 			</spring:bind>
 			</td>
 		</tr>

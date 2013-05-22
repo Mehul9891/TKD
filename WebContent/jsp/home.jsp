@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="commons.jsp"></jsp:include>
 <br>
-<i class="headline">Thank you For Visiting '<c:out value="${sessionScope.loginform.customer.name}"/>'.</i>
+<i class="headline">Thank you .</i>
 
 </body>
 </html>
