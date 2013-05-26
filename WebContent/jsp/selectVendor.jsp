@@ -67,7 +67,7 @@ function selectVendor(vendorId)
 	<thead>
 		<tr class="header">
 			<td  width="20%">ID</td>
-			<td width="20%">Nasme</td>
+			<td width="20%">Name</td>
 			<td  width="20%">Contact NO</td>
 			<td  width="20%">Area</td>
 			<td  width="20%">Products Catered</td>

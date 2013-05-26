@@ -16,6 +16,7 @@
 				<prop key="/payments.htm">paymentsController</prop>
 				<prop key="/paymentDetails.htm">paymentDetailsController</prop>
 				<prop key="/codeMaster.htm">codeMasterController</prop>
+				<prop key="/analysis.htm">analysisController</prop>
 			</props>
 		</property>
 	</bean>
@@ -100,6 +101,13 @@
 		<property name="successView" value="jsp/submit.jsp"/>
 		<property name="commandName" value="codeMasterForm"/>
 		<property name="commandClass" value="com.nb.form.CodeMasterForm"/>
+		
+	</bean>	
+	<bean id="analysisController" class="com.nb.controller.AnalysisController">
+		<property name="formView" value="jsp/analysis.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="commandName" value="analysisForm"/>
+		<property name="commandClass" value="com.nb.form.AnalysisForm"/>
 		
 	</bean>	
 			
