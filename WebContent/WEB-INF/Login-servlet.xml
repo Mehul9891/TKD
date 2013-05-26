@@ -73,7 +73,7 @@
 	</bean>	
 	<bean id="pendingRequestDetailsController" class="com.nb.controller.PendingRequestDetailsController">
 		<property name="formView" value="jsp/pendingRequestDetails.jsp"/>
-		<property name="successView" value="jsp/completedRequestConfirmation.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
 		<property name="commandName" value="pendingRequestDetailsForm"/>
 		<property name="commandClass" value="com.nb.form.PendingRequestDetailsForm"/>
 		

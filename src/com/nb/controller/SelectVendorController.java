@@ -3,15 +3,18 @@ package com.nb.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
@@ -27,8 +30,70 @@ public class SelectVendorController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		// TODO Auto-generated method stub
+		selectvendorform = (SelectVendorForm)command;
+		String selectedLocation = selectvendorform.getSelectLocation();
+		String selectedProduct = selectvendorform.getSelectProduct();
+		List results;
+		 
+		 Session session= null;
+			try{
+		        /* factory = new Configuration().configure().buildSessionFactory();
+		          session = factory.openSession();*/
+				session = SessionFactoryUtil.getSessionInstance();
+		         session.beginTransaction();
+		         String hql = " FROM Vendor";
+		         
+		        
+		         if(selectedLocation != null && !"".equals(selectedLocation) )
+		         {
+		        	 hql = hql + " WHERE zone LIKE lower('%' || :zone || '%') ";
+		         }
+		         if(selectedProduct != null && !"".equals(selectedProduct) )
+		         {
+		        	 if(selectedLocation != null && !"".equals(selectedLocation) )
+			         {
+		        		 hql = hql + " OR catered_products LIKE lower('%' || :product || '%') ";
+			         }
+		        	 else
+		        		 hql = hql + " WHERE catered_products LIKE lower('%' || :product || '%') ";
+		        	
+		         }
+		         
+		          Query query = session.createQuery(hql);
+		          if(selectedLocation != null && !"".equals(selectedLocation) )
+			         {
+		        	  query.setString("zone", selectedLocation);
+			         }
+		          if(selectedProduct != null && !"".equals(selectedProduct) )
+			         {
+		        	  query.setString("product", selectedProduct);
+		        	 }
+		         
+		          results = query.list();	 
+		         
+		          List vendorList = new ArrayList();
+		          int i =0;
+		          for(;i<results.size();i++)
+		          {
+		        	 vendorList.add((Vendor)results.get(i)) ;
+		        	  
+		          }
+		          request.setAttribute("size", results.size());
+		          selectvendorform.setLstVendor(vendorList);
+		          session.getTransaction().commit();
+		             session.close();
+		             /*factory.close();*/
+		      }catch (Throwable ex) { 
+		         System.err.println("Failed to create sessionFactory object." + ex);
+		         session.getTransaction().rollback();
+	             session.close();
+	            /* factory.close();*/
+		         throw new ExceptionInInitializerError(ex); 
+		      }
+			
 		
-		return super.onSubmit(request, response, command, errors);
+		
+		return this.showForm(request, response, errors);
 	}
 
 	@Override
@@ -69,4 +134,39 @@ public class SelectVendorController extends SimpleFormController {
 		// TODO Auto-generated method stub
 		return selectvendorform;
 	}
+	
+	@Override
+	protected Map referenceData(HttpServletRequest request, Object command,
+			Errors errors) throws Exception {
+		
+		Session session;
+		session = SessionFactoryUtil.getSessionInstance();
+		session.beginTransaction();
+		 String hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
+         Query query = session.createQuery(hql);
+         query.setString("codeMasterSyntex", "PRODUCT_LIST");
+         List result = query.list();
+         if(result != null && result.size()>0)
+         {
+        	 request.setAttribute("lstproduct", result);
+         }
+         
+          hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
+         query = session.createQuery(hql);
+         query.setString("codeMasterSyntex", "LOCATION");
+         result = query.list();
+         if(result != null && result.size()>0)
+         {
+        	 request.setAttribute("lstLocation", result);
+         }
+		
+		session.getTransaction().commit();
+		
+		System.out.println("Code Master list successfull set in request.");
+		session.close();
+		
+		// TODO Auto-generated method stub
+		return super.referenceData(request, command, errors);
+	}
+	
 }

@@ -29,18 +29,35 @@ function selectVendor(vendorId)
 <form method="post"> 
 <table>
 	<tr>
-		<td width="20%" align="right" class="text1">
+		<td width="15%" align="right" class="text1">
 			Location : 
 		</td>
-		<td width="25%" align="left">
-			<input type="text"  id="location" name="location"  size="30"/>
+		<td width="15%" align="left">
+			<spring:bind path="selectVendorForm.selectLocation">
+							<select id="${status.expression}" name="${status.expression}" >
+									<option></option>
+									  <c:forEach items="${lstLocation}" var="locationDetails">
+									  	<option value="${locationDetails.codeMasterFieldValue}" >${locationDetails.codeMasterFieldName}</option>
+									 </c:forEach>	
+							</select>				
+				</spring:bind>
 		</td>
 		
-		<td width="20%" align="right" class="text1">
+		<td width="15%" align="right" class="text1">
 			Repair Product : 
 		</td>
-		<td width="25%" align="left">
-			<input type="text" id="repairProduct" name="repairProduct" size="30"/>
+		<td width="15%" align="left">
+			<spring:bind path="selectVendorForm.selectProduct">
+					<select id="${status.expression}" name="${status.expression}" >
+								<option></option>
+							   <c:forEach items="${lstproduct}" var="productDetails">
+									<option value="${productDetails.codeMasterFieldValue}" >${productDetails.codeMasterFieldName}</option>
+								</c:forEach>	
+					</select>
+			</spring:bind>
+		</td>	
+		<td width="40" align="left">
+			<input type="button" value="Search" onclick="document.forms[0].submit();">
 		</td>
 	</tr>
 
@@ -50,7 +67,7 @@ function selectVendor(vendorId)
 	<thead>
 		<tr class="header">
 			<td  width="20%">ID</td>
-			<td width="20%">Name</td>
+			<td width="20%">Nasme</td>
 			<td  width="20%">Contact NO</td>
 			<td  width="20%">Area</td>
 			<td  width="20%">Products Catered</td>

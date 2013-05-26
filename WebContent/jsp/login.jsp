@@ -105,10 +105,10 @@ $(document).ready(function(){
 			<td class="text1">Zone :</td>
 			<td>
 				<spring:bind path="loginForm.customer.zone">
-							<select id="${status.expression}" name="${status.expression}" >
+							<select id="${status.expression}" name="${status.expression}"  >
 									<option></option>
 									  <c:forEach items="${lstLocation}" var="locationDetails">
-										<option value="${locationDetails.codeMasterFieldValue}" >${locationDetails.codeMasterFieldName}</option>
+										<option value="${locationDetails.codeMasterFieldValue}" <c:if test="${status.value eq locationDetails.codeMasterFieldValue}"> selected </c:if> >${locationDetails.codeMasterFieldName}</option>
 									 </c:forEach>	
 							</select>				
 				</spring:bind>

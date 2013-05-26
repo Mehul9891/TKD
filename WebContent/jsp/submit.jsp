@@ -10,7 +10,7 @@
 <body>
 <form method="post">
 <jsp:include page="commons.jsp"></jsp:include>
-<i class="headline">Thank you operation successful.</i>
+<i class="headline">Operation successful.</i>
 
 </form>
 </body>
