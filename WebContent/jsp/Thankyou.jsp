@@ -3,13 +3,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%><html>
 <head>
+<link rel="stylesheet" type="text/css" href="default.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>No Brokerage</title>
+<title>TKD</title>
 </head>
 <body>
-<jsp:include page="commons.jsp"></jsp:include>
+
 <br>
-<i class="headline">Thank you .</i>
+<i class="headline">Operation Succesful.</i>
 
 </body>
 </html>

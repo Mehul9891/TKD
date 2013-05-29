@@ -41,30 +41,30 @@ public class PaymentDetailsController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("INside on submit function");
-		Session session = null;
-		paymentDetailsForm =(PaymentDetailsForm)command;
-		
-		CompletedRequest completedRequest = new CompletedRequest();
-		try{
-		session = SessionFactoryUtil.getSessionInstance();
-        session.beginTransaction();
-        String hql = "UPDATE CompletedRequest set payment_recvd = :payment_recvd "  + 
-                "WHERE compt_sr_no = :compt_sr_no";
-        Query query = session.createQuery(hql);
-        query.setInteger("compt_sr_no", paymentDetailsForm.getCompletedRequest().getCompt_sr_no());
-        query.setString("payment_recvd", paymentDetailsForm.getCompletedRequest().getPayment_recvd());
-        int result = query.executeUpdate();
-        System.out.println("Rows affected: " + result);
-        session.getTransaction().commit();
-        session.close();
-		}catch(Exception e){
-			session.getTransaction().rollback();
-	        session.close();
-			System.out.println("Print Error Stack :"+e);
-		}
-		
-		return super.onSubmit(request, response, command, errors);
+				System.out.println("INside on submit function");
+				Session session = null;
+				paymentDetailsForm =(PaymentDetailsForm)command;
+				
+				CompletedRequest completedRequest = new CompletedRequest();
+				try{
+				session = SessionFactoryUtil.getSessionInstance();
+		        session.beginTransaction();
+		        String hql = "UPDATE CompletedRequest set payment_recvd = :payment_recvd "  + 
+		                "WHERE compt_sr_no = :compt_sr_no";
+		        Query query = session.createQuery(hql);
+		        query.setInteger("compt_sr_no", paymentDetailsForm.getCompletedRequest().getCompt_sr_no());
+		        query.setString("payment_recvd", paymentDetailsForm.getCompletedRequest().getPayment_recvd());
+		        int result = query.executeUpdate();
+		        System.out.println("Rows affected: " + result);
+		        session.getTransaction().commit();
+		        session.close();
+				}catch(Exception e){
+					session.getTransaction().rollback();
+			        session.close();
+					System.out.println("Print Error Stack :"+e);
+				}
+				
+				return super.onSubmit(request, response, command, errors);
 	}
 
 	@Override

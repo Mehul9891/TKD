@@ -20,7 +20,16 @@ function closeScreen()
 
 function selectVendor(vendorId)
 {
-	parent.document.getElementById("vendor.vendor_id").value = vendorId;
+	
+	if(parent.document.getElementById("vendor.vendor_id") != null)
+		{
+		    parent.document.getElementById("vendor.vendor_id").value = vendorId;
+		}
+	else 
+		{
+		 parent.document.getElementById("pendingRequest.vendor_id").value = vendorId;
+		}
+	
 	parent.hidePopupFrame();
 	
 }

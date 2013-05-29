@@ -34,7 +34,7 @@
 	
 	<bean id="loginController" class="com.nb.controller.loginController">
 		<property name="formView" value="index.jsp"/>
-		<property name="successView" value="jsp/home.jsp"/>
+		<property name="successView" value="jsp/submit.jsp"/>
 		<property name="commandName" value="loginForm"/>
 		<property name="commandClass" value="com.nb.form.LoginForm"/>
 	</bean>
@@ -74,7 +74,7 @@
 	</bean>	
 	<bean id="pendingRequestDetailsController" class="com.nb.controller.PendingRequestDetailsController">
 		<property name="formView" value="jsp/pendingRequestDetails.jsp"/>
-		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="successView" value="jsp/Thankyou.jsp"/>
 		<property name="commandName" value="pendingRequestDetailsForm"/>
 		<property name="commandClass" value="com.nb.form.PendingRequestDetailsForm"/>
 		
@@ -90,7 +90,7 @@
 	
 	<bean id="paymentDetailsController" class="com.nb.controller.PaymentDetailsController">
 		<property name="formView" value="jsp/paymentDetails.jsp"/>
-		<property name="successView" value="jsp/submit.jsp"/>
+		<property name="successView" value="jsp/Thankyou.jsp"/>
 		<property name="commandName" value="paymentDetailsForm"/>
 		<property name="commandClass" value="com.nb.form.PaymentDetailsForm"/>
 		

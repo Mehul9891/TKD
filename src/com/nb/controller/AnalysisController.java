@@ -70,6 +70,8 @@ public class AnalysisController extends SimpleFormController{
                  productMarketShare.add(result1.size());
                  
         	 }	 
+        	 
+        	
         	 if(productMarketShare != null &&  productMarketShare.size()>0)
         	 {
         		 request.setAttribute("productMarketShare", productMarketShare);
@@ -81,10 +83,44 @@ public class AnalysisController extends SimpleFormController{
        
 		session.getTransaction().commit();
 		
+		
+		System.out.println("Code Master list successfull set in request.");
+		
+		
+		session.beginTransaction();
+		  hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
+         query = session.createQuery(hql);
+         query.setString("codeMasterSyntex", "LOCATION");
+          result = query.list();
+         
+        List zonalMarketShare = new ArrayList();
+        if(result != null && result.size()>0)
+        {
+        	for(int i=0;i<result.size();i++)
+       	 {
+       		  hql = " FROM Customer WHERE zone LIKE lower('%' || :zone || '%') ";
+                query = session.createQuery(hql);
+                query.setString("zone",((CodeMaster)result.get(i)).getCodeMasterFieldValue());
+                result1 = query.list();
+                zonalMarketShare.add(result1.size());
+                
+       	 }	 
+       	 
+       	
+       	 if(zonalMarketShare != null &&  zonalMarketShare.size()>0)
+       	 {
+       		 request.setAttribute("zonalMarketShare", zonalMarketShare);
+       	 }	 
+       	 request.setAttribute("lstZone", result);
+       	 request.setAttribute("size1", result.size());
+        }
+        
+      
+		session.getTransaction().commit();
+		
+		
 		System.out.println("Code Master list successfull set in request.");
 		session.close();
-		
-	
 		
 	return analysisForm;
 		

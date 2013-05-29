@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
 <%@include file="commons.jsp"  %>
+<meta http-equiv="refresh" content="40">
 <html>
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <head>

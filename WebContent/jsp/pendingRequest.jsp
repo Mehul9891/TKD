@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="refresh" content="60">
 <title>Theek kar do.com</title>
 </head>
 <script type="text/javascript">
@@ -103,13 +104,13 @@ $(document).ready(function(){
 			<td  width="20%">Vendor Id</td>
 			<td  width="20%">product</td>
 			<td  width="20%">Date</td>
-			<td  width="20%">Associate Vendor</td>
+			
 		</tr>
 	</thead>
 	
 	<tbody>
 	<c:if test="${pendingRequestForm.lstPendingRequest ne null}">
-		<c:forEach begin="0" end="${size - 1}"   varStatus="loopStatus">
+		<c:forEach begin="0" end="${size}"   varStatus="loopStatus">
 	
 			<tr>
 				
@@ -131,9 +132,7 @@ $(document).ready(function(){
 					<c:out value="${pendingRequestForm.lstPendingRequest[loopStatus.index].date_of_request}"></c:out>
 				</td>
 				
-				<td align="center" class="text1">
-					<input type="button" value="Vendor List" onclick="showVendorDetails();"/>
-				</td>
+				
 				
 			</tr>
 			

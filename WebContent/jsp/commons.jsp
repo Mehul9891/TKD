@@ -23,7 +23,7 @@
 			<li ><a href="payments.htm">Payments</a></li>&nbsp;&nbsp;&nbsp;
 			<li ><a href="sendEmail.htm">Send Email</a></li>&nbsp;&nbsp;&nbsp;
 			<li ><a href="codeMaster.htm">Code Master</a></li>&nbsp;&nbsp;&nbsp;
-			<li ><a href="analysis.htm">Analytics</a></li>&nbsp;&nbsp;&nbsp;
+			<li ><a href="analysis.htm">Statistics</a></li>&nbsp;&nbsp;&nbsp;
 			<li ><a href="contact.htm">Contact Us</a></li>
 	</ul>	
 	

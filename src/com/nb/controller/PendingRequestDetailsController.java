@@ -41,63 +41,82 @@ public class PendingRequestDetailsController extends SimpleFormController{
 			throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("INside on submit function");
-		Session session = null;
+		Session session = SessionFactoryUtil.getSessionInstance();
+		String operationFlag = request.getParameter("operationFlag");
+		if("selectVendor".equals(operationFlag))
+		{
+			PendingRequestDetailsForm pendingRequestDetailsForm = (PendingRequestDetailsForm)command;
+			
+			
+			
+			session.beginTransaction();
+			   String hql = "UPDATE PendingRequest set vendor_id = :vendor_id "  + 
+		                "WHERE pend_sr_no = :pend_sr_no";
+		        Query query = session.createQuery(hql);
+		        query.setInteger("vendor_id", pendingRequestDetailsForm.getPendingRequest().getVendor_id());
+		        query.setInteger("pend_sr_no", pendingRequestDetailsForm.getPendingRequest().getPend_sr_no());
+		        int result = query.executeUpdate();
+			session.getTransaction().commit();
+			session.close();
+		}
+		else
+		{
+				PendingRequestDetailsForm pendingRequestDetailsForm = (PendingRequestDetailsForm)command;
+				CompletedRequest completedRequest = new CompletedRequest();
+				
+				completedRequest.setPend_sr_no(pendingRequestDetailsForm.getPendingRequest().getPend_sr_no());
+				completedRequest.setCustId(pendingRequestDetailsForm.getPendingRequest().getCustId());
+				completedRequest.setVendor_id(pendingRequestDetailsForm.getPendingRequest().getVendor_id());
+				completedRequest.setProduct(pendingRequestDetailsForm.getPendingRequest().getProduct());
+				completedRequest.setProduct_details(pendingRequestDetailsForm.getPendingRequest().getProduct_details());
+				completedRequest.setProduct_company(pendingRequestDetailsForm.getPendingRequest().getProduct_company());
+				completedRequest.setProblem(pendingRequestDetailsForm.getPendingRequest().getProblem());
+				
+				completedRequest.setDate_of_request(pendingRequestDetailsForm.getPendingRequest().getDate_of_request());
+				completedRequest.setTime_of_request(pendingRequestDetailsForm.getPendingRequest().getTime_of_request());
+				completedRequest.setSource_of_call(pendingRequestDetailsForm.getPendingRequest().getSource_of_call());
+				completedRequest.setRemarks(pendingRequestDetailsForm.getPendingRequest().getRemarks());
+				completedRequest.setCust_amt_col(pendingRequestDetailsForm.getCust_amt_col());
+				completedRequest.setFeedback(pendingRequestDetailsForm.getFeedback());
+				completedRequest.setSp_amt_col(pendingRequestDetailsForm.getSp_amt_col());
+				completedRequest.setCust_sp_diff(pendingRequestDetailsForm.getCust_sp_diff());
+				completedRequest.setOur_share(pendingRequestDetailsForm.getOur_share());
+				completedRequest.setPayment_recvd(pendingRequestDetailsForm.getPayment_recvd());
+				
+				completedRequest.setDate_of_solving(pendingRequestDetailsForm.getDate_of_solving());
+				/*SessionFactory factory = new Configuration().configure().buildSessionFactory();
+				Session session = factory.openSession();*/
 		
-		PendingRequestDetailsForm pendingRequestDetailsForm = (PendingRequestDetailsForm)command;
-		CompletedRequest completedRequest = new CompletedRequest();
-		
-		completedRequest.setPend_sr_no(pendingRequestDetailsForm.getPendingRequest().getPend_sr_no());
-		completedRequest.setCustId(pendingRequestDetailsForm.getPendingRequest().getCustId());
-		completedRequest.setVendor_id(pendingRequestDetailsForm.getPendingRequest().getVendor_id());
-		completedRequest.setProduct(pendingRequestDetailsForm.getPendingRequest().getProduct());
-		completedRequest.setProduct_details(pendingRequestDetailsForm.getPendingRequest().getProduct_details());
-		completedRequest.setProduct_company(pendingRequestDetailsForm.getPendingRequest().getProduct_company());
-		completedRequest.setProblem(pendingRequestDetailsForm.getPendingRequest().getProblem());
-		
-		completedRequest.setDate_of_request(pendingRequestDetailsForm.getPendingRequest().getDate_of_request());
-		completedRequest.setTime_of_request(pendingRequestDetailsForm.getPendingRequest().getTime_of_request());
-		completedRequest.setSource_of_call(pendingRequestDetailsForm.getPendingRequest().getSource_of_call());
-		completedRequest.setRemarks(pendingRequestDetailsForm.getPendingRequest().getRemarks());
-		completedRequest.setCust_amt_col(pendingRequestDetailsForm.getCust_amt_col());
-		completedRequest.setFeedback(pendingRequestDetailsForm.getFeedback());
-		completedRequest.setSp_amt_col(pendingRequestDetailsForm.getSp_amt_col());
-		completedRequest.setCust_sp_diff(pendingRequestDetailsForm.getCust_sp_diff());
-		completedRequest.setOur_share(pendingRequestDetailsForm.getOur_share());
-		completedRequest.setPayment_recvd(pendingRequestDetailsForm.getPayment_recvd());
-		
-		completedRequest.setDate_of_solving(pendingRequestDetailsForm.getDate_of_solving());
-		/*SessionFactory factory = new Configuration().configure().buildSessionFactory();
-		Session session = factory.openSession();*/
-		session = SessionFactoryUtil.getSessionInstance();
-		session.beginTransaction();
-		session.save(completedRequest);
-		session.getTransaction().commit();
-		System.out.println("Request completed successfully;");
-		/*session.close();
-		
-		factory = new Configuration().configure().buildSessionFactory();
-         session = factory.openSession();
-		session = SessionFactoryUtil.getSessionInstance();*/
-		session.beginTransaction();
-         String hql = "DELETE FROM PendingRequest WHERE pend_sr_no = :pend_req_id";
-         Query query = session.createQuery(hql);
-         query.setInteger("pend_req_id", pendingRequestDetailsForm.getPendingRequest().getPend_sr_no());
-         int result = query.executeUpdate();
-         if (result == 0) {  
-             System.out.println("Doesn't deleted any row!");
-             session.getTransaction().rollback();
-             session.close();
-            /* factory.close();*/
-         } else {  
-             System.out.println("Deleted Row: " + result);  
-             session.getTransaction().commit();
-             session.close();
-           /*  factory.close();*/
-         }  
-         System.out.println("Rows affected: " + result);
-		
-        
- 		 System.out.println("Pending Request details deleted successfully.");
+				session.beginTransaction();
+				session.save(completedRequest);
+				session.getTransaction().commit();
+				System.out.println("Request completed successfully;");
+				/*session.close();
+				
+				factory = new Configuration().configure().buildSessionFactory();
+		         session = factory.openSession();
+				session = SessionFactoryUtil.getSessionInstance();*/
+				session.beginTransaction();
+		         String hql = "DELETE FROM PendingRequest WHERE pend_sr_no = :pend_req_id";
+		         Query query = session.createQuery(hql);
+		         query.setInteger("pend_req_id", pendingRequestDetailsForm.getPendingRequest().getPend_sr_no());
+		         int result = query.executeUpdate();
+		         if (result == 0) {  
+		             System.out.println("Doesn't deleted any row!");
+		             session.getTransaction().rollback();
+		             session.close();
+		            /* factory.close();*/
+		         } else {  
+		             System.out.println("Deleted Row: " + result);  
+		             session.getTransaction().commit();
+		             session.close();
+		           /*  factory.close();*/
+		         }  
+		         System.out.println("Rows affected: " + result);
+				
+		        
+		 		 System.out.println("Pending Request details deleted successfully.");
+		}		 
 		return super.onSubmit(request, response, command, errors);
 	}
 

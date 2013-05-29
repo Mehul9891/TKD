@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags"%><html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
 <html>
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <head>
@@ -19,10 +19,12 @@
 		if(document.getElementById("status").value == 'complete')
 		{
 			$('#FieldForCompleteStatus').show();
+			$('#submitVendor').hide();
 		}
 		else
 		{
 			$('div#FieldForCompleteStatus').hide();
+			$('#submitVendor').show();
 		}	
 	}
 	
@@ -40,10 +42,59 @@
 		document.forms[0].submit();
 		
 	}
+	function submitVendor()
+	{
+		document.getElementById("operationFlag").value = "selectVendor";
+		document.forms[0].submit();
+		
+	}
 	
+	
+</script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	<%-- [IDC-337262 | 2011.07.22] CIF SEARCH OVERLAY is launched from page-specific function --%>
+	$("#selectVendor").click(function(){
+		$("#curtain").toggle();					
+		$("#popupFrame").toggle();
+		$("#popupFrame").attr("src", "selectVendor.htm");
+		//$("body").css("overflow", "hidden");
+		$("body").css("overflow", "auto");	
+	});
+	
+	$("#curtain").click(function(){
+		$(this).toggle();
+		$("#popupFrame").toggle();
+		$("body").css("overflow", "auto");
+		
+		<%-- [IDC-337262 | 2011.08.05] CLEAR CONTENTS OF OVERLAY FRAME --%>
+		$("#popupFrame").attr("src", "about:blank");		
+	});
+});
+
+	$(document).ready(function(){
+		
+		$('.datepicker').datepicker();
+	});
+	
+	function hidePopupFrame(){
+		$("#curtain").toggle();
+		$("#popupFrame").toggle();	
+		
+		<%-- [IDC-337262 | 2011.08.05] CLEAR CONTENTS OF OVERLAY FRAME --%>
+		$("#popupFrame").attr("src", "about:blank");
+		$("body").css("overflow", "auto");	
+	}
+
 </script>
 <body onload="disableFields();" >
 <form method="post" id="pendingRequestDetails"  >
+
+<div class="LosOverlayCurtain" id="curtain" >&nbsp;</div>
+<iframe class="LosOverlay" id="popupFrame"  name="popupFrame"  ></iframe>
+
 <h1>Pending Request Details</h1>
  <table>
 		<tr>
@@ -63,18 +114,20 @@
 		</tr>
 		
 		<tr>
-			<td class="text1">Vendor Id :</td>
-			<td>
-				<spring:bind path="pendingRequestDetailsForm.pendingRequest.vendor_id">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" />
-				</spring:bind>
-			</td>
+			
 			
 			<td class="text1">Product :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.pendingRequest.product">
 					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" />
 				</spring:bind>
+			</td>
+			<td class="text1">Vendor Id :</td>
+			<td>
+				<spring:bind path="pendingRequestDetailsForm.pendingRequest.vendor_id">
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" />
+				</spring:bind>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" id="selectVendor" value="SelectVendor"  />
 			</td>
 		</tr>
 		
@@ -89,7 +142,7 @@
 			<td class="text1">Problem :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.pendingRequest.problem">
-					<textarea rows="2" cols="50" type="text" id="${status.expression}" name="${status.expression}"  >${status.value}</textarea>
+					<textarea rows="2" cols="50" id="${status.expression}" name="${status.expression}"  >${status.value}</textarea>
 				</spring:bind>
 			</td>
 		</tr>
@@ -105,7 +158,7 @@
 			<td class="text1">Remarks :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.pendingRequest.remarks">
-					<textarea rows="2" cols="50" type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" ></textarea>
+					<textarea rows="2" cols="50"  id="${status.expression}" name="${status.expression}"  >${status.value}</textarea>
 				</spring:bind>
 			</td>
 		</tr>
@@ -113,7 +166,7 @@
 			<td class="text1">Status :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.status">
-					<select type="text" id="${status.expression}" name="${status.expression}"  onchange="checkStatus();"  >
+					<select  id="${status.expression}" name="${status.expression}"  onchange="checkStatus();"  >
 						<option value="pending">Pending</option>
 						<option value="complete">Complete</option>
 					</select>
@@ -161,7 +214,7 @@
 			<td class="text1">Payment Received :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.payment_recvd">
-					<select type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" >
+					<select  id="${status.expression}" name="${status.expression}" >
 						<option value="yes">Yes</option>
 						<option value="no" selected="selected">No</option>
 					</select>
@@ -171,7 +224,7 @@
 			<td class="text1">Feedback :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.feedback">
-					<textarea rows="2" cols="50" type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" ></textarea>
+					<textarea rows="2" cols="50" id="${status.expression}" name="${status.expression}" >${status.value}</textarea>
 				</spring:bind>
 			</td>
 		</tr>
@@ -187,15 +240,25 @@
 		
 		
 	</table> 
-	<table>
+	
+		<table>
 	<tr>
 		<td></td>
 		<td><input type="button" value="Submit"  class="button" onclick="submitForm();"/></td>
 		<td><input type="button" value="Close"  class="button" onclick="closeScreen();"/></td>
 		<td></td>
 	</tr>
-	</table>	
+	</table>
 </div>
+<table id="submitVendor">
+	<tr>
+		<td></td>
+		<td><input type="button" value="Submit"  class="button" onclick="submitVendor();"/></td>
+		<td><input type="button" value="Close"  class="button" onclick="closeScreen();"/></td>
+		<td></td>
+	</tr>
+	</table>	
+	<input type="hidden" id="operationFlag" name="operationFlag"  />
 </form>	
 </body>
 </html>
