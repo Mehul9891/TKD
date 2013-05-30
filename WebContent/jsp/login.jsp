@@ -4,6 +4,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="com.nb.constants.Constants" %>
+
+<% String companyNameStr =  Constants.CompanyName;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,7 +56,7 @@ $(document).ready(function(){
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Theek kar do.com</title>
+<title>Customer Request</title>
 </head>
 <body>
 
@@ -61,11 +65,11 @@ $(document).ready(function(){
 <iframe class="LosOverlay" id="popupFrame"  name="popupFrame"  ></iframe>
 		
 
-<H1>Welcome to Theek kar do.com</H1>
+<H1>Welcome to <%=companyNameStr%></H1>
 	<table >
 	
 		<tr>
-			<td class="text1">Phone No:</td>
+			<td class="text1">Phone No<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.customer.mobile_no">
 					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" maxlength="10"/>
@@ -76,7 +80,7 @@ $(document).ready(function(){
 			</td>	
 		</tr>
 		<tr>
-			<td class="text1">Name :</td>
+			<td class="text1">Name<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.customer.name">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
@@ -84,7 +88,7 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		
-		<tr><td class="text1">Email ID:</td>
+		<tr><td class="text1">Email ID<r>*</r> :</td>
 			<td>
 			<spring:bind path="loginForm.customer.emailId">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
@@ -94,7 +98,7 @@ $(document).ready(function(){
 		
 		
 		<tr>
-			<td class="text1">Customer Add:</td>
+			<td class="text1">Customer Add<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.customer.cust_address">
 					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/></td>
@@ -102,7 +106,7 @@ $(document).ready(function(){
 		</tr>
 		
 		<tr>
-			<td class="text1">Zone :</td>
+			<td class="text1">Zone<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.customer.zone">
 							<select id="${status.expression}" name="${status.expression}"  >
@@ -112,18 +116,20 @@ $(document).ready(function(){
 									 </c:forEach>	
 							</select>				
 				</spring:bind>
+				</td>
 		</tr>
 		
 		<tr>
 			<td class="text1">Pincode :</td>
 			<td>
 				<spring:bind path="loginForm.customer.pincode">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/></td>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" maxlength="7"/>
 				</spring:bind>
+			</td>	
 		</tr>
 		
 		<tr>
-			<td class="text1">Repair Product :</td>
+			<td class="text1">Repair Product<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.customer.products_repaired">
 					<select id="${status.expression}" name="${status.expression}" >
@@ -137,7 +143,7 @@ $(document).ready(function(){
 		</tr>
 		
 		<tr>
-			<td class="text1">Product Model :</td>
+			<td class="text1">Product Model<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.product_model">
 					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
@@ -146,7 +152,7 @@ $(document).ready(function(){
 		</tr>
 		
 		<tr>
-			<td class="text1">Problem :</td>
+			<td class="text1">Problem<r>*</r> :</td>
 			<td>
 				<spring:bind path="loginForm.problem">
 					<textarea rows="2" cols="40"  id="${status.expression}" name="${status.expression}" value="${status.value}"></textarea>
@@ -164,8 +170,8 @@ $(document).ready(function(){
 		<tr>
 			<td class="text1">Vendor :</td>
 			<td>
-				<spring:bind path="loginForm.vendor.vendor_id">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
+				<spring:bind path="loginForm.vendor.vendor_id" >
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 				</spring:bind>
 			</td>
 			

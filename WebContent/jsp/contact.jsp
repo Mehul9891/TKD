@@ -6,23 +6,23 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Theek Kar Do.com</title>
+<title><%=companyNameStr%></title>
 </head>
 <body>
 <form  method="post">
 	
 
-	<H1>Contact Details</H1>
+	<H1>Address Details</H1>
 
-	<i2><b>Theek Kar Do,</b></i2><br>
-		<i2>A-52,</i2><br>
-		<i2>Om Heera Panna Mall,</i2><br>
-		 <i2>Oshiwara,</i2>  <br>
-		<i2>Andheri-West,</i2><br>
-		<i2>Mumbai-400053</i2><br>
+	<i2><b><%=companyNameStr%>,</b></i2><br>
+		<i2><%=companyAdd1%></i2><br>
+		<i2><%=companyAdd2%></i2><br>
+		 <i2><%=companyAdd3%></i2>  <br>
+		<i2><%=companyAdd4%></i2><br>
+		<i2><%=companyAdd5%></i2><br>
 	<br><br><br>	
 	<H1>Contact Details</H1>
-		<i2><b>Call us : 80-80-853-853</b></i2><br>
+		<i2><b><%=companyContactNo%></b></i2><br>
 		
 	
 </form>

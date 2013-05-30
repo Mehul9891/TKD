@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Theek Kar Do.com</title>
+<title>Send Mail</title>
 </head>
 <body>
 <form  method="post">

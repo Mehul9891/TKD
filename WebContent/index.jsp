@@ -8,7 +8,7 @@ response.sendRedirect("login.htm");
 %> --%>
 <head>
 
-<title>Theek kar do.com</title>
+<title>Register Complaint</title>
 </head>
 <body>
 <form method="post">

@@ -5,11 +5,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
+<%@page import="com.nb.constants.Constants" %>
+
+<% String CompanyName =  Constants.CompanyName;
+%>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Theek kar do.com</title>
+<title><%=CompanyName%></title>
 </head>
 <body>
 <form method="post">
@@ -27,7 +31,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.compt_sr_no">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -37,7 +41,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.product">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -45,7 +49,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.product_details">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -55,7 +59,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.problem">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -63,7 +67,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.cust_amt_col">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -73,7 +77,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.date_of_solving">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -81,7 +85,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.time_of_solving">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -97,7 +101,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.custId">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -107,7 +111,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.name">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -115,7 +119,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.mobile_no">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -125,7 +129,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.emailId">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -133,7 +137,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.cust_address">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -143,7 +147,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.zone">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -151,7 +155,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.customer.pincode">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -168,7 +172,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.vendor_id">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -178,7 +182,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.companyName">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -186,7 +190,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.ownername">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -196,7 +200,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.mobile_no">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -204,7 +208,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.address">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>	
@@ -215,7 +219,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.zone">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		<td width="15%" align="right" class="text1">
@@ -223,7 +227,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.vendor.pincode">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>	
@@ -240,7 +244,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.cust_amt_col">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		
@@ -249,7 +253,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.sp_amt_col">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>
@@ -260,7 +264,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.cust_sp_diff">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 		
@@ -269,7 +273,7 @@
 		</td>
 		<td width="15%" align="left">
 			<spring:bind path="paymentDetailsForm.completedRequest.our_share">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" readonly="readonly"/>
 			</spring:bind>
 		</td>
 	</tr>

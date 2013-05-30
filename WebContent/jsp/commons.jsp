@@ -3,6 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
+<%@page import="com.nb.constants.Constants" %>
+
+<% String companyNameStr =  Constants.CompanyName;
+String companyShortName =  Constants.CompanyShortName;
+String companyAdd1 =  Constants.CompanyAdd1;
+String companyAdd2 =  Constants.CompanyAdd2;
+String companyAdd3 =  Constants.CompanyAdd3;
+String companyAdd4 =  Constants.CompanyAdd4;
+String companyAdd5 =  Constants.CompanyAdd5;
+String companyContactNo =  Constants.CompanyContactNo;
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -14,7 +25,7 @@
 
 </script>
 <body>
-<div class="top_header"><i >Theek Kar Do.Com</i>
+<div class="top_header"><i ><%=companyNameStr%></i>
 <br>
 <ul class="inline" id="login" align="center"  >
 			<li ><a href="login.htm"  >Register</a></li>&nbsp;&nbsp;&nbsp;

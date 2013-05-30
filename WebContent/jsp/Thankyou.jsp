@@ -5,12 +5,12 @@
 <head>
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>TKD</title>
+<title>Thank you</title>
 </head>
 <body>
 
 <br>
-<i class="headline">Operation Succesful.</i>
+<i class="headline">Operation Successful.</i>
 
 </body>
 </html>

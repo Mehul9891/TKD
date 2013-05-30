@@ -7,6 +7,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
 
 <%@ include file="commons.jsp" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -17,7 +18,7 @@
 <H1>Register Vendor</H1>
 	<table >
 	<tr>
-			<td class="text1">Company Name :</td>
+			<td class="text1">Company Name<r>*</r> :</td>
 			<td>
 				<spring:bind path="vendorForm.vendor.companyName">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"  size="30"/>
@@ -25,7 +26,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="text1">Office Name :</td>
+			<td class="text1">Office Name<r>*</r> :</td>
 			<td>
 				<spring:bind path="vendorForm.vendor.officeName">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
@@ -35,7 +36,7 @@
 	
 	
 		<tr>
-			<td class="text1">Owner Name :</td>
+			<td class="text1">Owner Name<r>*</r> :</td>
 			<td>
 				<spring:bind path="vendorForm.vendor.ownername">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30" />
@@ -43,13 +44,13 @@
 			</td>
 		</tr>
 		
-		<tr><td class="text1">Mobile No :</td>
+		<tr><td class="text1">Mobile No<r>*</r> :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.mobile_no">
 				<textarea rows="2" cols="30"  id="${status.expression}" name="${status.expression}" value="${status.value}" ></textarea>			</spring:bind>
 			</td>
 		</tr>
-		<tr><td class="text1">Address :</td>
+		<tr><td class="text1">Address<r>*</r> :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.address">
 				<textarea rows="2" cols="30"  id="${status.expression}" name="${status.expression}" value="${status.value}" ></textarea>
@@ -57,7 +58,7 @@
 			</td>
 		</tr>
 		
-		<tr><td class="text1">Products Catered :</td>
+		<tr><td class="text1">Products Catered<r>*</r> :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.catered_products">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
@@ -65,7 +66,7 @@
 			</td>
 		</tr>
 		
-		<tr><td class="text1">No of Technicians :</td>
+		<tr><td class="text1">No of Technicians<r>*</r> :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.no_of_technicians">
 				<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
@@ -79,7 +80,7 @@
 			</spring:bind>
 			</td>
 		</tr>
-		<tr><td class="text1">Zone :</td>
+		<tr><td class="text1">Zone<r>*</r> :</td>
 			<td>
 			<spring:bind path="vendorForm.vendor.zone">
 							<select id="${status.expression}" name="${status.expression}">

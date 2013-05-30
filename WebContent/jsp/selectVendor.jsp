@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Theek kar do.com</title>
+<title>Select Vendor</title>
 </head>
 <script type="text/javascript">
 	
