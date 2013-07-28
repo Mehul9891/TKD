@@ -10,7 +10,7 @@ import com.nb.entity.Vendor;
 public class PaymentsForm {
 	
 	private List lstCompletedRequest = new  ArrayList();
-	
+	private String pendingPayment;
 
 	public List getLstCompletedRequest() {
 		return lstCompletedRequest;
@@ -20,8 +20,17 @@ public class PaymentsForm {
 		this.lstCompletedRequest = lstCompletedRequest;
 	}
 
+	public String getPendingPayment() {
+		return pendingPayment;
+	}
+
+	public void setPendingPayment(String pendingPayment) {
+		this.pendingPayment = pendingPayment;
+	}
+
 	
 
+	
 	
 	
 	

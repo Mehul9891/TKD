@@ -11,6 +11,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( ".datepicker" ).datepicker("option", "dateFormat", "dd-mm-yy");
+  });
+  </script>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -34,10 +43,6 @@ $(document).ready(function(){
 	});
 });
 
-	$(document).ready(function(){
-		
-		$('.datepicker').datepicker();
-	});
 	
 	function hidePopupFrame(){
 		$("#curtain").toggle();
@@ -138,8 +143,24 @@ $(document).ready(function(){
 								<option value="${productDetails.codeMasterFieldValue}" >${productDetails.codeMasterFieldName}</option>
 								
 								</c:forEach>	
-					</select></td>
+					</select>
 				</spring:bind>
+			</td>	
+		</tr>
+		
+		<tr>
+			<td class="text1">Product Company<r>*</r> :</td>
+			<td>
+				<spring:bind path="loginForm.productCompany">
+					<select id="${status.expression}" name="${status.expression}" >
+								<option></option>
+							   <c:forEach items="${lstCompany}" var="productCompany">
+								<option value="${productCompany.codeMasterFieldValue}" >${productCompany.codeMasterFieldName}</option>
+								
+								</c:forEach>	
+					</select>
+				</spring:bind>
+			</td>	
 		</tr>
 		
 		<tr>
@@ -159,12 +180,19 @@ $(document).ready(function(){
 				</spring:bind>
 			</td>	
 		</tr>
-		
+		<tr>
+			<td class="text1">Date(DD-MM-YYYY)<r>*</r> :</td>
+			<td>
+				<spring:bind path="loginForm.issueRegDate">
+					<input type="text" id="${status.expression}" name="${status.expression}" ></input>
+				</spring:bind>	
+			</td>	
+		</tr>
 		<%-- <tr>
 			<td class="text1">Date :</td>
 			<td>
 				<spring:bind path="loginForm.customer.created_date">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" class="datepicker"/></td>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" /></td>
 				</spring:bind>
 		</tr> --%>
 		<tr>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.nb.entity.Vendor" table="VENDOR_DETAILS">
+      <meta attribute="class-description">
+         This class contains the property detail. 
+      </meta>
+      <cache usage="read-write" />
+      <id name="vendor_id" type="int" column="VENDOR_ID">
+         <generator class="native"/>
+      </id>
+     
+      <property name="ownername" column="NAME" type="string"/>
+      <property name="companyName" column="COMPANY_NAME" type="string"/>
+      <property name="officeName" column="OFFICE_NAME" type="string"/>
+      
+      <property name="mobile_no" column="MOBILE_NO" type="string"/>
+      <property name="address" column="ADDRESS" type="string"/>
+      <property name="catered_products" column="CATERED_PRODUCTS" type="string"/>
+      <property name="no_of_technicians" column="NO_OF_TECHNICIANS" type="string"/>
+      <property name="pincode" column="PINCODE" type="string"/>
+      <property name="zone" column="ZONE" type="string"/>
+      <property name="created_date" column="CREATED_DATE" type="date"/>
+      <property name="updated_date" column="UPDATED_DATE" type="date"/>
+      
+   </class>
+</hibernate-mapping>

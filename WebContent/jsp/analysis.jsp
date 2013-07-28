@@ -1,4 +1,3 @@
-<%@page import="org.apache.catalina.connector.Request"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
@@ -258,6 +257,8 @@
 			</c:if>
 	</c:forEach>
 	
-
+<div align="center" > 
+			<jsp:include page="commonFooter.jsp"></jsp:include>
+		</div>
 </body>
 </html>

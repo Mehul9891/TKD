@@ -1,5 +1,7 @@
 package com.nb.form;
 
+import java.util.Date;
+
 import com.nb.entity.Customer;
 import com.nb.entity.Vendor;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -11,7 +13,9 @@ private	Customer customer = new Customer();
 private Vendor vendor = new Vendor();
 
 private String product_model;
+private String productCompany;
 private String problem;
+private Date issueRegDate;
 
 public Customer getCustomer() {
 	return customer;
@@ -43,6 +47,26 @@ public String getProblem() {
 
 public void setProblem(String problem) {
 	this.problem = problem;
+}
+
+
+
+
+
+public Date getIssueRegDate() {
+	return issueRegDate;
+}
+
+public void setIssueRegDate(Date issueRegDate) {
+	this.issueRegDate = issueRegDate;
+}
+
+public String getProductCompany() {
+	return productCompany;
+}
+
+public void setProductCompany(String productCompany) {
+	this.productCompany = productCompany;
 }
 	
      

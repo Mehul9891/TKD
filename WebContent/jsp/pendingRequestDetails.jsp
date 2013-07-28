@@ -10,8 +10,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Request Details</title>
-</head>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $( ".datepicker" ).datepicker();
+  });
+  </script>
+
+</head>
+
 <script type="text/javascript">
 
 	function checkStatus(){
@@ -38,7 +48,7 @@
 		
 	}
 	function submitForm(){
-		
+			
 		document.forms[0].submit();
 		
 	}
@@ -67,17 +77,14 @@ $(document).ready(function(){
 	$("#curtain").click(function(){
 		$(this).toggle();
 		$("#popupFrame").toggle();
-		$("body").css("overflow", "auto");
+		
 		
 		<%-- [IDC-337262 | 2011.08.05] CLEAR CONTENTS OF OVERLAY FRAME --%>
-		$("#popupFrame").attr("src", "about:blank");		
+		$("#popupFrame").attr("src", "about:blank");
+		$("body").css("overflow", "auto");
 	});
 });
 
-	$(document).ready(function(){
-		
-		$('.datepicker').datepicker();
-	});
 	
 	function hidePopupFrame(){
 		$("#curtain").toggle();
@@ -230,10 +237,10 @@ $(document).ready(function(){
 		</tr>
 		
 		 <tr>
-			<td class="text1">Date of solving :</td>
+			<td class="text1">Date of solving(DD-MM-YYYY) :</td>
 			<td>
 				<spring:bind path="pendingRequestDetailsForm.date_of_solving">
-					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}" size="30"/>
+					<input type="text" id="${status.expression}" name="${status.expression}" value="${status.value}"  size="30"/>
 				</spring:bind>
 			</td>
 		</tr> 
@@ -259,6 +266,10 @@ $(document).ready(function(){
 	</tr>
 	</table>	
 	<input type="hidden" id="operationFlag" name="operationFlag"  />
+<div align="center" > 
+			<jsp:include page="commonFooter.jsp"></jsp:include>
+		</div>
 </form>	
+
 </body>
 </html>

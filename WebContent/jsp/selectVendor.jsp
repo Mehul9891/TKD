@@ -89,8 +89,8 @@ function selectVendor(vendorId)
 	
 			<tr>
 				
-				<td align="center" style="text-decoration: underline;">
-					<a href="#"  onclick="selectVendor('<c:out value="${selectVendorForm.lstVendor[loopStatus.index].vendor_id}"/>');"><c:out value="${selectVendorForm.lstVendor[loopStatus.index].vendor_id}"/></a>
+				<td align="center" >
+					<a href="#" class="hyperLink" onclick="selectVendor('<c:out value="${selectVendorForm.lstVendor[loopStatus.index].vendor_id}"/>');"><c:out value="${selectVendorForm.lstVendor[loopStatus.index].vendor_id}"/></a>
 					
 				</td>
 				<td align="center" class="text1">

@@ -6,14 +6,23 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
 <%@include file="commons.jsp"  %>
-<meta http-equiv="refresh" content="40">
+<!-- <meta http-equiv="refresh" content="40"> -->
 <html>
 <link rel="stylesheet" type="text/css" href="default.css"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Payments</title>
+
 </head>
+
 <script type="text/javascript">
+$(document).ready(function() 
+	    { 
+	        $("#myTable").tablesorter(); 
+	    } 
+	); 
+
+
 $(document).ready(function(){
 	
 	<%-- [IDC-337262 | 2011.07.22] CIF SEARCH OVERLAY is launched from page-specific function --%>
@@ -50,26 +59,42 @@ $(document).ready(function(){
 	}
 
 
-
-
+	
 </script>
 
 <body>
-<form method="post"> 
+<form method="post" > 
 
 
 <div class="LosOverlayCurtain" id="curtain" >&nbsp;</div>
 <iframe class="LosOverlay" id="popupFrame"  name="popupFrame"  ></iframe>
-<table width="100%" class="datagrid">
+
+<table width="100%">
+	<tr>
+		<td align="right">Pending Payment :</td>
+		<td align="left">
+			<spring:bind path="paymentsForm.pendingPayment">
+				<select id = "${status.expression}" name="${status.expression}"  >
+						<option value="" >All</option>
+						<option value="yes">Yes</option>
+						<option value="no">No</option>
+				
+				</select>
+				</spring:bind>
+		<td align="left"><input type="submit" value="Search"  /></td>
+		</td>
+	</tr>
+</table>
+<table width="100%" class="tablesorter" id="myTable">
 	<thead>
-		<tr class="header">
-			<td  width="13%">Payment Id</td>
-			<td width="13%">Vendor Id</td>
-			<td width="13%">Customer Catered Date</td>
-			<td  width="13%">Amount Collected</td>
-			<td  width="13%">Our Share</td>
-			<td  width="20%">Feedback</td>
-			<td  width="10%">Payment Received</td>
+		<tr >
+			<th  width="13%">Payment Id</th>
+			<th width="13%">Vendor Id</th>
+			<th width="13%">Customer Catered Date</th>
+			<th  width="13%">Amount Collected</th>
+			<th  width="13%">Our Share</th>
+			<th  width="20%">Feedback</th>
+			<th  width="10%">Payment Received</th>
 		</tr>
 	</thead>
 	
@@ -80,7 +105,7 @@ $(document).ready(function(){
 			<tr>
 				
 				<td align="center" style="text-decoration: underline;">
-					<a href="#"  onclick="showRequestDetails('<c:out value="${paymentsForm.lstCompletedRequest[loopStatus.index].compt_sr_no}"/>');"><c:out value="${paymentsForm.lstCompletedRequest[loopStatus.index].compt_sr_no}"/></a>
+					<a href="#" class="hyperLink" onclick="showRequestDetails('<c:out value="${paymentsForm.lstCompletedRequest[loopStatus.index].compt_sr_no}"/>');"><c:out value="${paymentsForm.lstCompletedRequest[loopStatus.index].compt_sr_no}"/></a>
 					
 				</td>
 				<td align="center" class="text1">

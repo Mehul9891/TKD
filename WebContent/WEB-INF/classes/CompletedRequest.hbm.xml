@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.nb.entity.CompletedRequest" table="COMPLETED_REQUEST">
+      <meta attribute="class-description">
+         This class contains the pending request . 
+      </meta>
+       <cache usage="read-write" />
+      <id name="compt_sr_no" type="int" column="COMPT_SR_NO">
+         <generator class="native"/>
+      </id>
+      <property name="pend_sr_no" column="PEND_SR_NO" type="int"/>
+      <property name="custId" column="CUST_ID" type="int"/>
+      <property name="vendor_id" column="VENDOR_ID" type="int"/>
+      <property name="product" column="PRODUCT" type="string"/>
+      <property name="product_details" column="PRODUCT_DETAILS" type="string"/>
+      <property name="product_company" column="PRODUCT_COMPANY" type="string"/>
+      <property name="problem" column="PROBLEM" type="string"/>
+      <property name="date_of_request" column="DATE_OF_REQUEST" type="date"/>
+      <property name="time_of_request" column="TIME_OF_REQUEST" type="date"/>
+      
+      <property name="source_of_call" column="SOURCE_OF_CALL" type="string"/>
+      <property name="remarks" column="REMARKS" type="string"/>
+      <property name="cust_amt_col" column="CUST_AMT_COL" type="string"/>
+	  <property name="feedback" column="FEEDBACK" type="string"/>
+	  <property name="sp_amt_col" column="SP_AMT_COL" type="string"/>
+	  <property name="cust_sp_diff" column="CUST_SP_DIFF" type="string"/>
+	  <property name="our_share" column="OUR_SHARE" type="string"/>
+	  <property name="payment_recvd" column="PAYMENT_RECVD" type="string"/>
+	  <property name="complaint_id" column="COMPLAINT_ID" type="int"/>
+	  <property name="date_of_solving" column="DATE_OF_SOLVING" type="date"/>
+	  <property name="time_of_solving" column="TIME_OF_SOLVING" type="date"/>
+      <property name="rowstate" column="ROWSTATE" type="string"/>
+      
+   </class>
+</hibernate-mapping>

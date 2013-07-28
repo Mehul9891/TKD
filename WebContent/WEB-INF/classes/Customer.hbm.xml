@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.nb.entity.Customer" table="CUSTOMER">
+      <meta attribute="class-description">
+         This class contains the customer detail. 
+      </meta>
+     <cache usage="read-write" />
+      <id name="custId" type="int" column="CUST_ID">
+         <generator class="native"/>
+      </id>
+     
+      <property name="name" column="NAME" type="string"/>
+      <property name="emailId" column="EMAIL_ID" type="string"/>
+      <property name="mobile_no" column="MOBILE_NO" type="string"/>
+      <property name="cust_address" column="CUSTOMER_ADDRESS" type="string"/>
+      <property name="products_repaired" column="PRODUCT_REPAIRED" type="string"/>
+      <property name="pincode" column="PINCODE" type="string"/>
+      <property name="zone" column="ZONE" type="string"/>
+      <property name="created_date" column="CREATED_DATE" type="date"/>
+      <property name="updated_date" column="UPDATED_DATE" type="date"/>
+      
+   </class>
+</hibernate-mapping>

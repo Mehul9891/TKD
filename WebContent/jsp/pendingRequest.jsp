@@ -5,6 +5,7 @@
 
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pending Request</title>
 </head>
@@ -96,14 +97,14 @@ $(document).ready(function(){
 <iframe class="LosOverlay" id="popupFrame1"  name="popupFrame1"  ></iframe>
 		
 
-<table width="100%" class="datagrid">
+<table width="100%" class="datagrid tablesorter"  id="myTable" >
 	<thead>
 		<tr class="header">
-			<td  width="20%">Request Id</td>
-			<td width="20%">Customer Id</td>
-			<td  width="20%">Vendor Id</td>
-			<td  width="20%">product</td>
-			<td  width="20%">Date</td>
+			<th  width="20%">Request Id</th>
+			<th width="20%">Customer Id</th>
+			<th  width="20%">Vendor Id</th>
+			<th  width="20%">product</th>
+			<th  width="20%">Date</th>
 			
 		</tr>
 	</thead>
@@ -115,7 +116,7 @@ $(document).ready(function(){
 			<tr>
 				
 				<td align="center" style="text-decoration: underline;">
-					<a href="#"  onclick="showRequestDetails('<c:out value="${pendingRequestForm.lstPendingRequest[loopStatus.index].pend_sr_no}"/>');"><c:out value="${pendingRequestForm.lstPendingRequest[loopStatus.index].pend_sr_no}"/></a>
+					<a href="#" class="hyperLink" onclick="showRequestDetails('<c:out value="${pendingRequestForm.lstPendingRequest[loopStatus.index].pend_sr_no}"/>');"><c:out value="${pendingRequestForm.lstPendingRequest[loopStatus.index].pend_sr_no}"/></a>
 					
 				</td>
 				<td align="center" class="text1">
@@ -147,6 +148,10 @@ $(document).ready(function(){
 	<spring:bind path="pendingRequestForm.selectedReqId">
 				<input type="hidden" id="${status.expression}" name="${status.expression}" value="${status.value}" />
 	</spring:bind>
+	
+	<div align="center" > 
+			<jsp:include page="commonFooter.jsp"></jsp:include>
+		</div>
 </form>
 </body>
 </html>

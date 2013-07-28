@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+
+<project default="WEBLOGIC" name="TKD" basedir="..">
+	<property name="war.name" value="TKDWebApp"/>
+	<property name="src.dir" value="src"/>
+	<property name="web.dir" value="WebContent"/>
+	<property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
+	<property name="weblib.dir" value="${web.dir}/WEB-INF/lib"/>
+	<property name="ext-lib.dir" value="BUILD EAR SCRIPT/ext-lib"/>
+	<property name="webinf.dir" value="${web.dir}/WEB-INF"/>
+	<property name="weblogicEAR.dir" value=""/>
+	<!-- Weblogic EAR Deployable -->
+	
+	
+	 <property name="WEBLOGIC_APPLICATION_XML" value="BUILD EAR SCRIPT/WEBLOGIC/application.xml"/>
+	 
+	 <property name="war.dir" value="WAR"/>
+	
+	<property name="weblogic.dir" value="Weblogic Deployables"/>
+	<property name="ear.name" value="TKDAppEar"/>
+	
+	<path id="master-classpath" >
+        <fileset dir="${web.dir}/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+		
+		<fileset dir="${ext-lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		
+		
+        <pathelement path="${build.dir}"/>
+    </path>
+	
+	<target name="build" depends="clean" description="Compile source tree java files">
+        <mkdir dir="${build.dir}"/>
+		
+        <javac includeantruntime="false" destdir="${build.dir}" source="1.6" target="1.6" listfiles="on">
+            <src path="${src.dir}"/>
+            <classpath refid="master-classpath"/>
+        </javac>
+		<copy todir="${build.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.xml"/>
+            </fileset>
+        </copy>
+    </target>
+	
+	
+	<target name="build-jar" depends="build">
+			<jar destfile="${weblib.dir}/tkd.jar"
+				basedir="${build.dir}" compress="true" />
+				<echo>Jar Created Successfully</echo>
+	</target>
+	
+	<target name="create-war"  depends="build-jar">
+			<war destfile="${basedir}/WAR/${war.name}.war" webxml="${webinf.dir}/web.xml">
+			   <fileset dir="${web.dir}">
+				  <include name="**/*.*"/>
+				  
+				  <exclude name="WEB-INF/web.xml"/>
+			   </fileset>
+			   <classes dir="${build.dir}"/>
+			  
+			</war>
+			 <echo>WAR file created.</echo>
+	</target>
+	<target name="WEBLOGIC" depends="create-war"
+		description="Making LOS Weblogic deployable EAR">
+		<mkdir dir="${war.dir}/${weblogic.dir}"/>	
+		<mkdir dir="${war.dir}/${weblogic.dir}/${weblogicEAR.dir}"/>
+     		<ear earfile="${war.dir}/${weblogic.dir}/${weblogicEAR.dir}/${ear.name}.ear" appxml="${WEBLOGIC_APPLICATION_XML}">
+          		 <fileset dir="${war.dir}" includes="**/*.war"></fileset>
+			
+     		 </ear>
+			  <echo>EAR file created.</echo>
+	</target>
+	
+	 <target name="clean" depends="info" description="Clean output directories">
+		
+		<delete>
+            <fileset dir="${build.dir}">
+                <include name="**/*.class"/>
+				<include name="**/*.xml"/>
+            </fileset>
+			<fileset dir="${war.dir}">
+				<include name="**/*.war"/>
+				<include name="**/*.ear"/>
+			</fileset>
+			<fileset dir="${weblib.dir}">
+				<include name="**/TKD.jar"/>	
+			</fileset>
+        
+		</delete>
+		
+		
+		<echo>Files cleaned.</echo>
+    </target>
+	
+	<target name="info">
+		<echo>Its working fine</echo>
+		<echo>Base directory is ${basedir}</echo>
+	</target>
+	
+</project>

@@ -3,11 +3,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags"%>
 <html>
+
 <%-- <%
 response.sendRedirect("login.htm");
 %> --%>
 <head>
-
+<link rel="shortcut icon" href="images/CompanyLogo.jpg" type="image"  />
 <title>Register Complaint</title>
 </head>
 <body>
@@ -30,13 +31,10 @@ response.sendRedirect("login.htm");
 			</div>
 		</td>	
 	</tr>
-	<tr>
-		<td width="100%">
-		<div align="center" > 
+	
+</table>
+<div align="center" > 
 			<jsp:include page="jsp/commonFooter.jsp"></jsp:include>
 		</div>
-		</td>
-	</tr>
-</table>
 </form>
 </body>

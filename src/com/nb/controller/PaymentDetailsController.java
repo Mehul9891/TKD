@@ -41,7 +41,7 @@ public class PaymentDetailsController extends SimpleFormController {
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		// TODO Auto-generated method stub
-				System.out.println("INside on submit function");
+				System.out.println("inside on submit function of PaymentDetailsForm");
 				Session session = null;
 				paymentDetailsForm =(PaymentDetailsForm)command;
 				
@@ -92,7 +92,7 @@ public class PaymentDetailsController extends SimpleFormController {
 			         cr.setCacheable(true);
 			         results = cr.list();
 			        
-			      if(results != null)
+			      if(results != null && results.get(0) != null)
 			      {
 			    	  objCompletedRequest = (CompletedRequest)results.get(0);
 			      }
@@ -106,7 +106,7 @@ public class PaymentDetailsController extends SimpleFormController {
 				         cr.add(Restrictions.eq("custId", custIdNumber));
 				         cr.setCacheable(true);
 				         results = cr.list();
-				         if(results != null)
+				         if(results != null && results.get(0) != null)
 					      {
 				        	 objCustomer = (Customer)results.get(0);
 					      } 
@@ -144,33 +144,25 @@ public class PaymentDetailsController extends SimpleFormController {
 		
 	}
 	
-
-	@Override
 	protected void initBinder(HttpServletRequest request,
-			ServletRequestDataBinder binder) throws Exception {
-		// TODO Auto-generated method stub
-//		 convert java.util.Date
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	dateFormat.setLenient(false);
-	binder.registerCustomEditor(Date.class, null,
-	new CustomDateEditor(dateFormat, true));
-//		 convert java.lang.Long
-	NumberFormat nf = NumberFormat.getNumberInstance();
-	nf.setGroupingUsed(false);
-	binder.registerCustomEditor(Long.class, null,
-	new CustomNumberEditor(Long.class, nf, true));
-//		convert to Big Decimal
-	//NumberFormat nf1 = NumberFormat.getNumberInstance();
-	binder.registerCustomEditor(Double.class, null,
-	new CustomNumberEditor(Double.class,new DecimalFormat("###,##0"), true));
-	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+			ServletRequestDataBinder binder) {
+//				 convert java.util.Date
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			dateFormat.setLenient(false);
+			binder.registerCustomEditor(Date.class, null,
+			new CustomDateEditor(dateFormat, true));
+//				 convert java.lang.Long
+			NumberFormat nf = NumberFormat.getNumberInstance();
+			nf.setGroupingUsed(false);
+			binder.registerCustomEditor(Long.class, null,
+			new CustomNumberEditor(Long.class, nf, true));
+//				convert to Big Decimal
+			//NumberFormat nf1 = NumberFormat.getNumberInstance();
+			binder.registerCustomEditor(Double.class, null,
+			new CustomNumberEditor(Double.class,new DecimalFormat("###,##0.00"), true));
 
 
-
-		super.initBinder(request, binder);
-	}
-
-
-
+	}	
+	
 
 }

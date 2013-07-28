@@ -116,7 +116,7 @@ iframe.LosOverlay{
 		display: none;
 		position: absolute;
 		background-color: white;
-		top: 50; left: 50; width: 90%; height: 90%;
+		top: 50; left: 70; width: 90%; height: 90%;
 		
 	}
 div.LosOverlayCurtain{
@@ -161,4 +161,27 @@ table.datagrid td
 r
 {
 	color: red;
+}
+
+a
+{
+	display: inline-block;
+	/* background-color: #003366; */
+	color: white;
+	text-decoration: none;
+}
+.hyperLink
+{
+	color: gray;
+	text-decoration: underline;
+}
+.footerText
+{
+	color : white;
+}
+.footerBackground
+{
+	height: 50px;
+	width:100%;
+	background-color: gray; 
 }

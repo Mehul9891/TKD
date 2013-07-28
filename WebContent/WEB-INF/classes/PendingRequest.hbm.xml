@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="com.nb.entity.PendingRequest" table="PENDING_REQUEST">
+      <meta attribute="class-description">
+         This class contains the pending request . 
+      </meta>
+        <cache usage="read-write" />
+      <id name="pend_sr_no" type="int" column="PEND_SR_NO">
+         <generator class="native"/>
+      </id>
+     
+      <property name="custId" column="CUST_ID" type="int"/>
+      <property name="vendor_id" column="VENDOR_ID" type="int"/>
+      <property name="product" column="PRODUCT" type="string"/>
+      <property name="product_details" column="PRODUCT_DETAILS" type="string"/>
+      <property name="product_company" column="PRODUCT_COMPANY" type="string"/>
+      <property name="problem" column="PROBLEM" type="string"/>
+      <property name="date_of_request" column="DATE_OF_REQUEST" type="date"/>
+      <property name="time_of_request" column="TIME_OF_REQUEST" type="date"/>
+      
+      <property name="source_of_call" column="SOURCE_OF_CALL" type="string"/>
+      <property name="remarks" column="REMARKS" type="string"/>
+      <property name="created_date" column="CREATED_DATE" type="date"/>
+      <property name="updated_date" column="UPDATED_DATE" type="date"/>
+      <property name="rowstate" column="ROWSTATE" type="string"/>
+      
+   </class>
+</hibernate-mapping>

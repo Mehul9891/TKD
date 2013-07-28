@@ -13,11 +13,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
+import com.nb.entity.CodeMaster;
 import com.nb.entity.Vendor;
 import com.nb.form.SelectVendorForm;
 import com.nb.form.VendorForm;
@@ -41,35 +43,31 @@ public class SelectVendorController extends SimpleFormController {
 		          session = factory.openSession();*/
 				session = SessionFactoryUtil.getSessionInstance();
 		         session.beginTransaction();
-		         String hql = " FROM Vendor";
-		         
+		         Criteria cr = session.createCriteria(Vendor.class);
+			       
+		     	      
 		        
 		         if(selectedLocation != null && !"".equals(selectedLocation) )
 		         {
-		        	 hql = hql + " WHERE zone LIKE lower('%' || :zone || '%') ";
+		        	 if(selectedProduct == null || "".equals(selectedProduct) )
+			         {
+		        	 cr.add(Restrictions.like("zone",("%"+selectedLocation+"%")));	
+			         }
 		         }
 		         if(selectedProduct != null && !"".equals(selectedProduct) )
 		         {
 		        	 if(selectedLocation != null && !"".equals(selectedLocation) )
 			         {
-		        		 hql = hql + " OR catered_products LIKE lower('%' || :product || '%') ";
+		        		
+		        		 cr.add(Restrictions.or(Restrictions.like("zone",("%"+selectedLocation+"%")),Restrictions.like("catered_products",("%"+selectedProduct+"%"))));		 
 			         }
 		        	 else
-		        		 hql = hql + " WHERE catered_products LIKE lower('%' || :product || '%') ";
+		        		 cr.add(Restrictions.like("catered_products",("%"+selectedProduct+"%")));	
 		        	
 		         }
 		         
-		          Query query = session.createQuery(hql);
-		          if(selectedLocation != null && !"".equals(selectedLocation) )
-			         {
-		        	  query.setString("zone", selectedLocation);
-			         }
-		          if(selectedProduct != null && !"".equals(selectedProduct) )
-			         {
-		        	  query.setString("product", selectedProduct);
-		        	 }
 		         
-		          results = query.list();	 
+		          results = cr.list();	 
 		         
 		          List vendorList = new ArrayList();
 		          int i =0;
@@ -142,19 +140,20 @@ public class SelectVendorController extends SimpleFormController {
 		Session session;
 		session = SessionFactoryUtil.getSessionInstance();
 		session.beginTransaction();
-		 String hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
-         Query query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "PRODUCT_LIST");
-         List result = query.list();
+		Criteria cr = session.createCriteria(CodeMaster.class);
+	       
+      	 cr.add(Restrictions.eq("codeMasterSyntex", "PRODUCT_LIST"));
+       
+		List result = cr.list();
          if(result != null && result.size()>0)
          {
         	 request.setAttribute("lstproduct", result);
          }
          
-          hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
-         query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "LOCATION");
-         result = query.list();
+         cr = session.createCriteria(CodeMaster.class);
+         
+       	 cr.add(Restrictions.eq("codeMasterSyntex", "LOCATION"));
+         result = cr.list();
          if(result != null && result.size()>0)
          {
         	 request.setAttribute("lstLocation", result);

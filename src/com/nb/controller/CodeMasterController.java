@@ -7,10 +7,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.connector.Request;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,10 +67,11 @@ public class CodeMasterController extends SimpleFormController{
 		Session session;
 		session = SessionFactoryUtil.getSessionInstance();
 		session.beginTransaction();
-		 String hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
-         Query query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "CODE_MASTER");
-         List result = query.list();
+		Criteria cr = session.createCriteria(CodeMaster.class);
+	       
+      	 cr.add(Restrictions.eq("codeMasterSyntex", "CODE_MASTER"));
+   
+		List result = cr.list();
          if(result != null && result.size()>0)
          {
         	 request.setAttribute("lstCodeMaster", result);

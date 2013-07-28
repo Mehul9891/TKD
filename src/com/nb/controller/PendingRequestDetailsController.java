@@ -28,6 +28,8 @@ import com.nb.entity.Customer;
 import com.nb.entity.PendingRequest;
 import com.nb.form.LoginForm;
 import com.nb.form.PendingRequestDetailsForm;
+import com.nb.util.InvoiceGenerator;
+import com.nb.util.SendMailUtility;
 import com.nb.util.SessionFactoryUtil;
 
 public class PendingRequestDetailsController extends SimpleFormController{
@@ -82,6 +84,7 @@ public class PendingRequestDetailsController extends SimpleFormController{
 				completedRequest.setCust_sp_diff(pendingRequestDetailsForm.getCust_sp_diff());
 				completedRequest.setOur_share(pendingRequestDetailsForm.getOur_share());
 				completedRequest.setPayment_recvd(pendingRequestDetailsForm.getPayment_recvd());
+				completedRequest.setProduct_company(pendingRequestDetailsForm.getPendingRequest().getProduct_company());
 				
 				completedRequest.setDate_of_solving(pendingRequestDetailsForm.getDate_of_solving());
 				/*SessionFactory factory = new Configuration().configure().buildSessionFactory();
@@ -108,13 +111,37 @@ public class PendingRequestDetailsController extends SimpleFormController{
 		            /* factory.close();*/
 		         } else {  
 		             System.out.println("Deleted Row: " + result);  
-		             session.getTransaction().commit();
-		             session.close();
+		             
 		           /*  factory.close();*/
 		         }  
 		         System.out.println("Rows affected: " + result);
-				
+		         int custIdNumber = completedRequest.getCustId();
+		         Customer objCustomer = null;
+		         if(custIdNumber > 0)
+			      {
+		        	 Criteria   cr = session.createCriteria(Customer.class);
+				         cr.add(Restrictions.eq("custId", custIdNumber));
+				         cr.setCacheable(true);
+				      List   results = cr.list();
+				         if(results != null)
+					      {
+				        	 objCustomer = (Customer)results.get(0);
+					      } 
+			      }
+		         session.getTransaction().commit();
+	             session.close();
+		        /************* Invoice Generation*********************************/
+		         
+		         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+		      String invoiceFileName =   invoiceGenerator.createInvoice(completedRequest,objCustomer);
 		        
+		         
+		         /************* Email sending *********************************/ 
+		         
+		         SendMailUtility mailUtility = new SendMailUtility();
+		         
+		         mailUtility.sendMail(objCustomer.getEmailId(),invoiceFileName);
+		         
 		 		 System.out.println("Pending Request details deleted successfully.");
 		}		 
 		return super.onSubmit(request, response, command, errors);
@@ -142,43 +169,37 @@ public class PendingRequestDetailsController extends SimpleFormController{
 		         cr.add(Restrictions.eq("pend_sr_no", reqIdNumber));
 		          results = cr.list();
 		          
-		       session.close();
-		        	  
-		        	  pendingRequestDetailsForm.setPendingRequest((PendingRequest)results.get(0) );
+		         session.close();
+		        	  if(results!= null && results.get(0) != null)
+		        	     pendingRequestDetailsForm.setPendingRequest((PendingRequest)results.get(0) );
 		      }catch (Throwable ex) { 
 		         System.err.println("Failed to create sessionFactory object." + ex);
 		         throw new ExceptionInInitializerError(ex); 
 		      }
 		// TODO Auto-generated method stub
-		System.out.println("Inside form backing function.");
+		System.out.println("Inside form backing function of PendingRequestDetailsController.");
 		return pendingRequestDetailsForm;
 		
 	}
 	
-
-	@Override
 	protected void initBinder(HttpServletRequest request,
-			ServletRequestDataBinder binder) throws Exception {
-		// TODO Auto-generated method stub
-//		 convert java.util.Date
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	dateFormat.setLenient(false);
-	binder.registerCustomEditor(Date.class, null,
-	new CustomDateEditor(dateFormat, true));
-//		 convert java.lang.Long
-	NumberFormat nf = NumberFormat.getNumberInstance();
-	nf.setGroupingUsed(false);
-	binder.registerCustomEditor(Long.class, null,
-	new CustomNumberEditor(Long.class, nf, true));
-//		convert to Big Decimal
-	//NumberFormat nf1 = NumberFormat.getNumberInstance();
-	binder.registerCustomEditor(Double.class, null,
-	new CustomNumberEditor(Double.class,new DecimalFormat("###,##0"), true));
-	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+			ServletRequestDataBinder binder) {
+//				 convert java.util.Date
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			dateFormat.setLenient(false);
+			binder.registerCustomEditor(Date.class, null,
+			new CustomDateEditor(dateFormat, true));
+//				 convert java.lang.Long
+			NumberFormat nf = NumberFormat.getNumberInstance();
+			nf.setGroupingUsed(false);
+			binder.registerCustomEditor(Long.class, null,
+			new CustomNumberEditor(Long.class, nf, true));
+//				convert to Big Decimal
+			//NumberFormat nf1 = NumberFormat.getNumberInstance();
+			binder.registerCustomEditor(Double.class, null,
+			new CustomNumberEditor(Double.class,new DecimalFormat("###,##0.00"), true));
 
 
-
-		super.initBinder(request, binder);
-	}
+	}	
 
 }

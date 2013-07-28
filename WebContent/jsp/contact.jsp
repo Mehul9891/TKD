@@ -24,7 +24,9 @@
 	<H1>Contact Details</H1>
 		<i2><b><%=companyContactNo%></b></i2><br>
 		
-	
+	<div align="center" > 
+			<jsp:include page="commonFooter.jsp"></jsp:include>
+		</div>
 </form>
 	
 </body>

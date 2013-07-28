@@ -53,20 +53,21 @@ public class AnalysisController extends SimpleFormController{
 		Session session;
 		session = SessionFactoryUtil.getSessionInstance();
 		session.beginTransaction();
-		 String hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
-         Query query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "PRODUCT_LIST");
-         List result = query.list();
+		Criteria cr = session.createCriteria(CodeMaster.class);
+	       
+     	 cr.add(Restrictions.eq("codeMasterSyntex", "PRODUCT_LIST"));
+     
+         List result = cr.list();
          List result1;
          List productMarketShare = new ArrayList();
          if(result != null && result.size()>0)
          {
         	 for(int i=0;i<result.size();i++)
         	 {
-        		  hql = " FROM CompletedRequest WHERE product LIKE lower('%' || :product || '%') ";
-                 query = session.createQuery(hql);
-                 query.setString("product",((CodeMaster)result.get(i)).getCodeMasterFieldValue());
-                 result1 = query.list();
+        		  cr = session.createCriteria(CompletedRequest.class);
+      	       
+             	 cr.add(Restrictions.like("product",("%"+((CodeMaster)result.get(i)).getCodeMasterFieldValue()+"%")));
+             	 result1 = cr.list();
                  productMarketShare.add(result1.size());
                  
         	 }	 
@@ -88,20 +89,22 @@ public class AnalysisController extends SimpleFormController{
 		
 		
 		session.beginTransaction();
-		  hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
-         query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "LOCATION");
-          result = query.list();
+		 cr = session.createCriteria(CodeMaster.class);
+	       
+    	 cr.add(Restrictions.eq("codeMasterSyntex", "LOCATION"));
+
+          result = cr.list();
          
         List zonalMarketShare = new ArrayList();
         if(result != null && result.size()>0)
         {
         	for(int i=0;i<result.size();i++)
        	 {
-       		  hql = " FROM Customer WHERE zone LIKE lower('%' || :zone || '%') ";
-                query = session.createQuery(hql);
-                query.setString("zone",((CodeMaster)result.get(i)).getCodeMasterFieldValue());
-                result1 = query.list();
+        		 cr = session.createCriteria(Customer.class);
+        	       
+             	 cr.add(Restrictions.like("zone",((CodeMaster)result.get(i)).getCodeMasterFieldValue()+"%"));
+             	
+        		result1 = cr.list();
                 zonalMarketShare.add(result1.size());
                 
        	 }	 
@@ -131,21 +134,6 @@ public class AnalysisController extends SimpleFormController{
 	protected void initBinder(HttpServletRequest request,
 			ServletRequestDataBinder binder) throws Exception {
 		// TODO Auto-generated method stub
-//		 convert java.util.Date
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	dateFormat.setLenient(false);
-	binder.registerCustomEditor(Date.class, null,
-	new CustomDateEditor(dateFormat, true));
-//		 convert java.lang.Long
-	NumberFormat nf = NumberFormat.getNumberInstance();
-	nf.setGroupingUsed(false);
-	binder.registerCustomEditor(Long.class, null,
-	new CustomNumberEditor(Long.class, nf, true));
-//		convert to Big Decimal
-	//NumberFormat nf1 = NumberFormat.getNumberInstance();
-	binder.registerCustomEditor(Double.class, null,
-	new CustomNumberEditor(Double.class,new DecimalFormat("###,##0"), true));
-	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 
 
 

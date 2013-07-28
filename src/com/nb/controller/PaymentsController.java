@@ -39,9 +39,45 @@ public class PaymentsController extends SimpleFormController{
 			HttpServletResponse response, Object command, BindException errors)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("INside on submit function");
+		SessionFactory factory =null; 
+		List results;
+		Session session=null; 
+		System.out.println("Inside on submit function");
+		PaymentsForm objPaymentsForm = (PaymentsForm)command;
+		String operation = objPaymentsForm.getPendingPayment();
 		
-		return super.onSubmit(request, response, command, errors);
+		try{
+	        /* factory = new Configuration().configure().buildSessionFactory();*/
+	          /*session = factory.openSession();*/
+			 session = SessionFactoryUtil.getSessionInstance();	
+	         session.beginTransaction();
+	         Criteria cr = session.createCriteria(CompletedRequest.class);
+	         if(operation != null && operation !="")
+	        	 cr.add(Restrictions.eq("payment_recvd", operation));
+	          results = cr.list();
+	          List completedReqList = new ArrayList();
+	          int i =0;
+	          for(;i<results.size();i++)
+	          {
+	        	  completedReqList.add((CompletedRequest)results.get(i)) ;
+	        	  
+	          }
+	          request.setAttribute("size", results.size());
+	          paymentsForm.setLstCompletedRequest(completedReqList);
+	          session.getTransaction().commit();
+	          session.close();
+	          /*factory.close();*/
+	      }catch (Throwable ex) { 
+	         System.err.println("Failed to create sessionFactory object." + ex);
+	         session.getTransaction().rollback();
+             session.close();
+           /*  factory.close();*/
+	         
+	         throw new ExceptionInInitializerError(ex); 
+	      }
+	
+
+		return this.showForm(request, response, errors);
 	}
 
 	@Override
@@ -93,7 +129,7 @@ public class PaymentsController extends SimpleFormController{
 			ServletRequestDataBinder binder) throws Exception {
 		// TODO Auto-generated method stub
 //		 convert java.util.Date
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	dateFormat.setLenient(false);
 	binder.registerCustomEditor(Date.class, null,
 	new CustomDateEditor(dateFormat, true));

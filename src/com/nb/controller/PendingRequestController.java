@@ -1,5 +1,8 @@
 package com.nb.controller;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +14,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
@@ -65,5 +71,24 @@ public class PendingRequestController extends SimpleFormController {
 		// TODO Auto-generated method stub
 		return pendingRequestForm ;
 	}
+	protected void initBinder(HttpServletRequest request,
+			ServletRequestDataBinder binder) {
+//				 convert java.util.Date
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			dateFormat.setLenient(false);
+			binder.registerCustomEditor(Date.class, null,
+			new CustomDateEditor(dateFormat, true));
+//				 convert java.lang.Long
+			NumberFormat nf = NumberFormat.getNumberInstance();
+			nf.setGroupingUsed(false);
+			binder.registerCustomEditor(Long.class, null,
+			new CustomNumberEditor(Long.class, nf, true));
+//				convert to Big Decimal
+			//NumberFormat nf1 = NumberFormat.getNumberInstance();
+			binder.registerCustomEditor(Double.class, null,
+			new CustomNumberEditor(Double.class,new DecimalFormat("###,##0.00"), true));
+
+
+	}	
 }
 

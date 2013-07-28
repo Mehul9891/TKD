@@ -7,15 +7,19 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
+import com.nb.entity.CodeMaster;
+import com.nb.entity.CompletedRequest;
 import com.nb.entity.Vendor;
 import com.nb.form.VendorForm;
 import com.nb.util.SessionFactoryUtil;
@@ -69,18 +73,31 @@ public class VendorController extends SimpleFormController {
 		Session session;
 		session = SessionFactoryUtil.getSessionInstance();
 		session.beginTransaction();
-		 String hql = " FROM CodeMaster WHERE codeMasterSyntex = :codeMasterSyntex";
-         Query query = session.createQuery(hql);
-         query.setString("codeMasterSyntex", "LOCATION");
-         List result = query.list();
+		 Criteria cr = session.createCriteria(CodeMaster.class);
+		 cr.add(Restrictions.eq("codeMasterSyntex", "LOCATION"));
+		
+         List result = cr.list();
          if(result != null && result.size()>0)
          {
         	 request.setAttribute("lstLocation", result);
          }
 		
+		
+          cr = session.createCriteria(CodeMaster.class);
+		 cr.add(Restrictions.eq("codeMasterSyntex", "PRODUCT_LIST"));
+		  
+          result = cr.list();
+         if(result != null && result.size()>0)
+         {
+        	 request.setAttribute("lstproduct", result);
+         }
+         
+         
+		
 		session.getTransaction().commit();
 		
 		System.out.println("Code Master list successfull set in request.");
+		
 		session.close();
 		
 		// TODO Auto-generated method stub
